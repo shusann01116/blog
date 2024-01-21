@@ -1,3 +1,5 @@
+/* eslint-disable react/prop-types */
+
 import { Noto_Sans_JP } from "next/font/google";
 import { GoogleAnalytics } from "@next/third-parties/google";
 import React from "react";
