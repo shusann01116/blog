@@ -38,10 +38,6 @@ export default {
       </>
     )
   },
-  i18n: [
-    { locale: "en-US", text: "English" },
-    { locale: "ja-JP", text: "日本語" },
-  ],
   footer: {
     text: (
       <>
