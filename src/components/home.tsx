@@ -13,7 +13,7 @@ export function Home() {
   };
 
   return (
-    <div className="flex flex-col grow items-center justify-center h-screen">
+    <div className="flex flex-col grow items-center justify-center h-screen mx-4">
       <h1 className="text-4xl font-bold mb-6">Welcome to shusann's Blog</h1>
       <p className="text-xl mb-8">
         Dive into a world of thoughts and discoveries.
