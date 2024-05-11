@@ -9,7 +9,7 @@ const notoSansJP400 = Noto_Sans_JP({
   preload: false,
 });
 
-export default function Main({ children }) {
+export default function Main({ children }: { children: React.ReactNode }) {
   return (
     <>
       <GoogleAnalytics gaId="G-2NJX07FBDF" />
