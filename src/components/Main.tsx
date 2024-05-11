@@ -13,7 +13,7 @@ export default function Main({ children }) {
   return (
     <>
       <GoogleAnalytics gaId="G-2NJX07FBDF" />
-      <main className={notoSansJP400.className}>{children}</main>;
+      <main className={notoSansJP400.className}>{children}</main>
     </>
   );
 }

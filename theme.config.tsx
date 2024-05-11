@@ -1,11 +1,14 @@
-import React from 'react';
-import { useRouter } from 'next/router';
-import { useConfig } from 'nextra-theme-docs';
+import React from "react";
+import { useRouter } from "next/router";
+import { useConfig } from "nextra-theme-docs";
+import { DocsThemeConfig } from "nextra-theme-docs";
 
-export default {
+const config: DocsThemeConfig = {
   logo: (
     <>
-      <span style={{ merginLeft: "0.5rem", fontWeight: 800 }}>shusann&apos;s showcase</span>
+      <span style={{ marginLeft: "0.5rem", fontWeight: 800 }}>
+        shusann&apos;s showcase
+      </span>
     </>
   ),
   project: {
@@ -20,13 +23,13 @@ export default {
         openGraph: {
           title: "shusann's showcase",
         },
-      }
+      };
     }
   },
   head: () => {
     const { asPath, defaultLocale, locale } = useRouter();
     const { frontMatter } = useConfig();
-    const url = `https://showcase.shusann.dev${asPath === "/" ? "" : asPath}`;
+    const url = `https://blog.shusann.dev${asPath === "/" ? "" : asPath}`;
 
     return (
       <>
@@ -34,19 +37,31 @@ export default {
         <meta property="og:site_name" content="shusann's showcase" />
         <meta property="og:title" content={frontMatter.title} />
         <meta property="og:description" content={frontMatter.description} />
-        <meta property="og:image" content={`https://showcase.shusann.dev/og/${locale || defaultLocale}.png`} />
+        <meta
+          property="og:image"
+          content={`https://blog.shusann.dev/og/${
+            locale || defaultLocale
+          }.png`}
+        />
       </>
-    )
+    );
   },
   footer: {
     text: (
       <>
         <span>&copy; {new Date().getFullYear()} shusann</span>
-        <a href="https://showcase.shusann.dev" target="_blank" rel="noopener noreferrer" style={{ marginLeft: "1rem" }}>
-          showcase.shusann.dev
+        <a
+          href="https://blog.shusann.dev"
+          target="_blank"
+          rel="noopener noreferrer"
+          style={{ marginLeft: "1rem" }}
+        >
+          blog.shusann.dev
         </a>
       </>
-    )
+    ),
   },
   faviconGlyph: "📦",
 };
+
+export default config;

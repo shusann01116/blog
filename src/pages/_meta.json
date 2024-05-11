@@ -1,17 +1,21 @@
 {
   "index": {
     "title": "Home",
-    "type": "page"
+    "type": "page",
+    "display": "hidden",
+    "theme": {
+      "layout": "article"
+    }
   },
   "about": {
     "title": "About",
-    "type": "page"
+    "type": "page",
+    "theme": {
+      "typesetting": "article"
+    }
   },
   "blog": {
     "title": "Blog",
-    "theme": {
-      "typesetting": "article"
-    },
     "type": "page"
   },
   "github_link": {
