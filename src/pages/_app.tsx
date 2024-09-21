@@ -1,3 +1,4 @@
+import { GoogleAnalytics } from "@next/third-parties/google";
 import { AppProps } from "next/app";
 import Head from "next/head";
 import Link from "next/link";
@@ -15,6 +16,7 @@ export default function Nextra({ Component, pageProps }: AppProps) {
         />
       </Head>
       <Component {...pageProps} />
+      <GoogleAnalytics gaId="G-2NJX07FBDF" />
     </>
   );
 }

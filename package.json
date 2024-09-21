@@ -10,6 +10,8 @@
     "prepare": "husky"
   },
   "dependencies": {
+    "@next/third-parties": "^14.2.13",
+    "google": "link:@next/third-parties/google",
     "next": "14.2.13",
     "nextra": "^2.13.4",
     "nextra-theme-blog": "^2.13.4",
