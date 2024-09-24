@@ -1,15 +1,13 @@
-const withNextra = require("nextra")({
-  theme: "nextra-theme-docs",
-  themeConfig: "./theme.config.tsx",
-});
+import nextra from 'nextra'
 
-module.exports = withNextra({
-  images: {
-    remotePatterns: [
-      {
-        protocol: "https",
-        hostname: "avatars.githubusercontent.com",
-      },
-    ],
-  },
-});
+const withNextra = nextra({
+  theme: 'nextra-theme-blog',
+  themeConfig: './theme.config.jsx',
+  defaultShowCopyCode: true,
+  readingTime: true
+})
+
+export default withNextra({
+  reactStrictMode: true,
+  cleanDistDir: true
+})
