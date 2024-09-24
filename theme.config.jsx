@@ -1,3 +1,5 @@
+/* see: https://github.com/shuding/nextra/blob/main/packages/nextra-theme-blog/src/types.ts */
+
 /* eslint sort-keys: error */
 export default {
   components: {
