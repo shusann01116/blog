@@ -1,0 +1,72 @@
+---
+title: サイト整備
+date: 2024/09/25
+description: こつこつやっていっている様子をお届けしたいです
+tag: blog
+author: shusann01116
+---
+
+# サイト整備
+
+最近すっかり寒くなってきましたね。昨晩は寒さで目が覚めてしまいました。
+
+さて、今日はこのブログサイトに関連するメモを残していきたいと思います。
+
+## VS Code debug できない問題
+
+[Next.js の Debugging](https://nextjs.org/docs/pages/building-your-application/configuring/debugging) ページを参照すると、
+何故か shell のシンタックスエラーで弾かれてしまう問題が発生しました。どうやら、 pnpm でインストールすると shell スクリプトになるぽいらしいですが
+それが原因らしい？(真偽不明)
+
+とにかく、resolve したのでご紹介です。
+
+`launch.json` の `configurations` にいれるストラクトを `"runtimeExecutable": "sh"` のように変更するとうまくいきました。 ([ref](https://gist.github.com/esamattis/600d6964f3e6ab6e8e7da9a05bfe6574))
+
+```json
+{
+  "name": "Next.js: debug full stack",
+  "type": "node",
+  "request": "launch",
+  "program": "${workspaceFolder}/node_modules/.bin/next",
+  "runtimeExecutable": "sh", <-- ここ
+  "env": {
+    "NODE_OPTIONS": "--inspect"
+  },
+  "skipFiles": ["<node_internals>/**"],
+  "serverReadyAction": {
+    "action": "debugWithChrome",
+    "killOnServerStop": true,
+    "pattern": "- Local:.+(https?://.+)",
+    "uriFormat": "%s",
+    "webRoot": "${workspaceFolder}"
+  }
+}
+```
+
+## Tailwind CSS
+
+[tailwind](https://tailwindcss.com/docs/guides/nextjs) の公式サイトより、 [next.js](https://nextjs.org/docs/pages/building-your-application/styling/tailwind-css)
+の公式サイトの情報が詳しいのでこっちを見たほうがいいよという話です。(global.css どこで読み込むのかわからんみたいな人には結構大きな違いです)
+
+## TypeScript `paths` 問題
+
+やる機会が少ないので毎回忘れてしまうため備忘録も兼ねて、 [paths](https://www.typescriptlang.org/tsconfig/#paths) のドキュメントを読むと、以下のようにやってあげると `@/components/A/hahaha`
+みたいなノリでいけるので最高
+
+```json
+{
+  "compilerOptions": {
+    "paths": {
+      "@/*": ["./src/*"]
+    }
+  }
+}
+```
+
+## TODO
+
+- [ ] [shadcn/ui](https://ui.shadcn.com/) 入れたい
+- [ ] [algolia](https://www.algolia.com/) 入れたい
+- [ ] /feed.xml 対応したい
+
+とりあえずそこくらい、おやすみなさい。
