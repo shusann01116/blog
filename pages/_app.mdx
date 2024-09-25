@@ -1,4 +1,4 @@
-import { GoogleAnalytics } from '@next/third-parties/google'
+import { GoogleAnalytics } from "@next/third-parties/google";
 
 export default function App({ Component, pageProps }) {
   return (
@@ -6,5 +6,5 @@ export default function App({ Component, pageProps }) {
       <Component {...pageProps} />
       <GoogleAnalytics gaId="G-2NJX07FBDF" />
     </>
-  )
+  );
 }

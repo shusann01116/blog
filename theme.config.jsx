@@ -6,21 +6,22 @@ export default {
     h1: ({ children }) => (
       <h1
         style={{
-          WebkitBackgroundClip: 'text',
-          WebkitTextFillColor: 'transparent',
-          backgroundClip: 'text',
-          backgroundImage: 'linear-gradient(90deg,hsl(183, 100%, 50%),hsl(243, 100%, 50%))'
+          WebkitBackgroundClip: "text",
+          WebkitTextFillColor: "transparent",
+          backgroundClip: "text",
+          backgroundImage:
+            "linear-gradient(90deg,hsl(183, 100%, 50%),hsl(243, 100%, 50%))",
         }}
       >
         {children}
       </h1>
-    )
+    ),
   },
   darkMode: true,
-  dateFormatter: date => `Last updated at ${date.toDateString()}`,
+  dateFormatter: (date) => `Last updated at ${date.toDateString()}`,
   footer: (
-    <small style={{ display: 'block', marginTop: '8rem' }}>
-        MIT
+    <small style={{ display: "block", marginTop: "8rem" }}>
+      MIT
       {new Date().getFullYear()} © shusann01116.
       <style jsx>{`
         @media screen and (max-width: 480px) {
@@ -31,5 +32,5 @@ export default {
         }
       `}</style>
     </small>
-  )
-}
+  ),
+};
