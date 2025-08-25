@@ -4,6 +4,12 @@ import { getPageMap } from "nextra/page-map";
 import "nextra-theme-blog/style.css";
 import "@/styles/global.css";
 import { GoogleAnalytics } from "@next/third-parties/google";
+import {
+  SiZenn,
+  SiQiita,
+  SiGithub,
+  SiRss,
+} from "@icons-pack/react-simple-icons";
 
 export const metadata = {
   title: "shusann01116's blog",
@@ -25,17 +31,25 @@ export default async function RootLayout({ children }: LayoutProps<"/">) {
           </Navbar>
           {children}
           <Footer>
-            <abbr
-              title="This blog is licensed under the MIT License."
-              className="cursor-help"
-            >
-              MIT
-            </abbr>{" "}
-            {new Date().getFullYear()} © shusann01116. RSS feed is available{" "}
-            <a href="/rss.xml" className="underline">
-              here
-            </a>
-            .
+            <div className="flex flex-row items-center gap-4">
+              <span className="flex gap-3 flex-row">
+                <a href="https://zenn.dev/shusann01116" target="_blank">
+                  <SiZenn size={24} color="#3EA8FF" />
+                </a>
+                <a href="https://qiita.com/shusann01116" target="_blank">
+                  <SiQiita size={24} color="#55C500" />
+                </a>
+                <a href="https://github.com/shusann01116" target="_blank">
+                  <SiGithub size={24} />
+                </a>
+                <a href="/rss.xml" target="_blank">
+                  <SiRss size={24} />
+                </a>
+              </span>
+              <section className="text-sm text-gray-500 dark:text-gray-400 leading-4 ml-auto">
+                MIT {new Date().getFullYear()} © shusann01116.
+              </section>
+            </div>
           </Footer>
         </Layout>
       </body>

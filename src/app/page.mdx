@@ -2,6 +2,7 @@
 type: page
 title: わたし (About)
 date: 2024-09-21
+readingTime: false
 ---
 
 # shusann01116
@@ -17,10 +18,39 @@ Hi, I'm a Software Engineer at Tokyo, Japan. See the blog posts from [here](/pos
 
 ## Tech
 
-ASP.NET Core, AWS, C#, React, Next.js, Golang, Docker, kubernetes
+import {
+  SiReact,
+  SiDotnet,
+  SiNextdotjs,
+  SiGo,
+  SiKubernetes,
+  SiRust,
+  SiGooglecloud,
+  SiZenn,
+  SiQiita,
+  SiGithub,
+} from "@icons-pack/react-simple-icons";
+
+<div className="flex gap-4">
+  <SiReact color="#61DAFB" size={48} />
+  <SiDotnet color="#512BD4" size={48} />
+  <SiNextdotjs size={48} />
+  <SiGo color="#00ADD8" size={48} />
+  <SiKubernetes color="#486CE5" size={48} />
+  <SiRust size={48} />
+  <SiGooglecloud size={48} color="#4285F4" />
+</div>
 
 ## Media
 
-- [Zenn](https://zenn.dev/shusann01116)
-- [Qiita](https://qiita.com/shusann01116)
-- [GitHub](https://github.com/shusann01116)
+<div className="flex gap-4">
+  <a href="https://zenn.dev/shusann01116">
+    <SiZenn size={48} color="#3EA8FF" />
+  </a>
+  <a href="https://qiita.com/shusann01116">
+    <SiQiita size={48} color="#55C500" />
+  </a>
+  <a href="https://github.com/shusann01116">
+    <SiGithub size={48} />
+  </a>
+</div>
