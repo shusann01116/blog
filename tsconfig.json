@@ -7,8 +7,8 @@
     "noEmit": true,
     "incremental": true,
     "module": "esnext",
-    "esModuleInterop": true,
     "moduleResolution": "bundler",
+    "esModuleInterop": true,
     "resolveJsonModule": true,
     "isolatedModules": true,
     "jsx": "preserve",
@@ -28,7 +28,9 @@
     "**/*.ts",
     "**/*.tsx",
     "src/pages/_document.mdx",
-    ".next/types/**/*.ts"
+    ".next/types/**/*.ts",
+    "src/mdx-components.mjs",
+    "src/utils/get-posts.js"
   ],
   "exclude": ["node_modules"]
 }
