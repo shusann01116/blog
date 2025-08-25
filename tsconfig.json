@@ -24,13 +24,12 @@
     "target": "ES2017"
   },
   "include": [
-    "next-env.d.ts",
+    "**/*.mdx",
     "**/*.ts",
     "**/*.tsx",
-    "src/pages/_document.mdx",
+    "next-env.d.ts",
     ".next/types/**/*.ts",
-    "src/mdx-components.mjs",
-    "src/utils/get-posts.js"
+    "src/mdx-components.mjs"
   ],
   "exclude": ["node_modules"]
 }

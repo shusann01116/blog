@@ -8,13 +8,15 @@ export async function getPosts() {
   });
   return directories
     .filter((post) => post.name !== "index")
-    .sort(
-      (a, b) => new Date(b.frontMatter.date) - new Date(a.frontMatter.date),
-    );
+    .sort((a, b) => {
+      const dateA = new Date(a.frontMatter?.date ?? "").getTime();
+      const dateB = new Date(b.frontMatter?.date ?? "").getTime();
+      return dateB - dateA;
+    });
 }
 
 export async function getTags() {
   const posts = await getPosts();
-  const tags = posts.flatMap((post) => post.frontMatter.tags);
+  const tags: string[] = posts.flatMap((post) => post.frontMatter?.tags ?? []);
   return tags;
 }

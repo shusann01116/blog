@@ -1,4 +1,4 @@
-import { getPosts } from "@/utils/get-posts.mjs";
+import { getPosts } from "@/utils/get-posts";
 
 const CONFIG = {
   title: "shusann01116's blog",

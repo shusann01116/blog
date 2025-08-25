@@ -1,6 +1,6 @@
 import Link from "next/link";
 import { PostCard } from "nextra-theme-blog";
-import { getPosts, getTags } from "@/utils/get-posts.mjs";
+import { getPosts, getTags } from "@/utils/get-posts";
 
 export const metadata = {
   title: "Posts",
