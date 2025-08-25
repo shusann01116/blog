@@ -10,7 +10,7 @@
     "lint": "next lint",
     "lint:prettier": "prettier -w .",
     "prepare": "husky",
-    "postbuild": "pagefind --site .next/server/app --output-path out/_pagefind"
+    "postbuild": "pagefind --site .next/server/app --output-path public/_pagefind"
   },
   "dependencies": {
     "@next/third-parties": "^15.5.0",
