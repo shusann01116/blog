@@ -33,16 +33,28 @@ export default async function RootLayout({ children }: LayoutProps<"/">) {
           <Footer>
             <div className="flex flex-row items-center gap-4">
               <span className="flex gap-3 flex-row">
-                <a href="https://zenn.dev/shusann01116" target="_blank">
+                <a
+                  href="https://zenn.dev/shusann01116"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
                   <SiZenn size={24} color="#3EA8FF" />
                 </a>
-                <a href="https://qiita.com/shusann01116" target="_blank">
+                <a
+                  href="https://qiita.com/shusann01116"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
                   <SiQiita size={24} color="#55C500" />
                 </a>
-                <a href="https://github.com/shusann01116" target="_blank">
+                <a
+                  href="https://github.com/shusann01116"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
                   <SiGithub size={24} />
                 </a>
-                <a href="/rss.xml" target="_blank">
+                <a href="/rss.xml" target="_blank" rel="noopener noreferrer">
                   <SiRss size={24} />
                 </a>
               </span>
