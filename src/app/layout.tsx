@@ -10,6 +10,9 @@ import {
   SiGithub,
   SiRss,
 } from "@icons-pack/react-simple-icons";
+import { Noto_Sans_JP } from "next/font/google";
+
+const NotoSansJP = Noto_Sans_JP({ subsets: ["latin"] });
 
 export const metadata = {
   title: "shusann01116's blog",
@@ -23,7 +26,7 @@ export default async function RootLayout({ children }: LayoutProps<"/">) {
         <GoogleAnalytics gaId="G-2NJX07FBDF" />
       </Head>
 
-      <body>
+      <body className={NotoSansJP.className}>
         <Layout>
           <Navbar pageMap={await getPageMap()}>
             <Search />
