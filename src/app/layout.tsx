@@ -55,7 +55,7 @@ export default async function RootLayout({ children }: LayoutProps<"/">) {
                   <SiGithub size={24} />
                 </a>
                 <a href="/rss.xml" target="_blank" rel="noopener noreferrer">
-                  <SiRss size={24} />
+                  <SiRss size={24} color="#EE802F" />
                 </a>
               </span>
               <section className="text-sm text-gray-500 dark:text-gray-400 leading-4 ml-auto">
