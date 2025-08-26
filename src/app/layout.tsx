@@ -9,6 +9,7 @@ import {
   SiQiita,
   SiGithub,
   SiRss,
+  SiX,
 } from "@icons-pack/react-simple-icons";
 import { Noto_Sans_JP } from "next/font/google";
 
@@ -56,6 +57,9 @@ export default async function RootLayout({ children }: LayoutProps<"/">) {
                   rel="noopener noreferrer"
                 >
                   <SiGithub size={24} />
+                </a>
+                <a href="https://x.com/beans_splash">
+                  <SiX size={24} />
                 </a>
                 <a href="/rss.xml" target="_blank" rel="noopener noreferrer">
                   <SiRss size={24} color="#EE802F" />
