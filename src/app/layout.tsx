@@ -62,7 +62,7 @@ export default async function RootLayout({ children }: LayoutProps<"/">) {
                 </a>
               </span>
               <section className="text-sm text-gray-500 dark:text-gray-400 leading-4 ml-auto">
-                MIT {new Date().getFullYear()} © shusann01116.
+                {new Date().getFullYear()} © shusann01116.
               </section>
             </div>
           </Footer>
