@@ -18,7 +18,7 @@ export const metadata = {
 export default async function RootLayout({ children }: LayoutProps<"/">) {
   return (
     <html lang="en" suppressHydrationWarning>
-      <Head backgroundColor={{ dark: "#0f172a", light: "#fefce8" }}>
+      <Head backgroundColor={{ dark: "#0f172a", light: "#fefefa" }}>
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <GoogleAnalytics gaId="G-2NJX07FBDF" />
       </Head>
