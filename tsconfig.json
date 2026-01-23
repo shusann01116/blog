@@ -11,7 +11,7 @@
     "esModuleInterop": true,
     "resolveJsonModule": true,
     "isolatedModules": true,
-    "jsx": "preserve",
+    "jsx": "react-jsx",
     "forceConsistentCasingInFileNames": true,
     "paths": {
       "@/*": ["./src/*"]
@@ -28,8 +28,9 @@
     "**/*.ts",
     "**/*.tsx",
     "next-env.d.ts",
+    "src/mdx-components.mjs",
     ".next/types/**/*.ts",
-    "src/mdx-components.mjs"
+    ".next/dev/types/**/*.ts"
   ],
   "exclude": ["node_modules"]
 }
