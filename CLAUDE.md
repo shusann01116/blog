@@ -58,5 +58,5 @@ author: shusann01116
 - TypeScript strict mode is enabled
 - ESLint uses flat config format (`eslint.config.mjs`), ignoring `.next/`, `node_modules/`, `_pagefind/`
 - Nextra config in `next.config.mjs` enables copy-code buttons and reading time
-- Husky pre-commit hook is configured
+- Lefthook pre-commit hook runs Prettier on staged files (`lefthook.yml`)
 - Content is primarily in Japanese
