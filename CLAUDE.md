@@ -10,10 +10,10 @@ Personal blog built with **Next.js 16** + **Nextra 4** (MDX blog theme). Content
 
 | Command       | Description                                                                  |
 | ------------- | ---------------------------------------------------------------------------- |
-| `pnpm dev`    | Start dev server (Turbopack)                                                 |
-| `pnpm build`  | Production build (runs `next build`, then Pagefind indexing via `postbuild`) |
-| `pnpm lint`   | ESLint (flat config, v9)                                                     |
-| `pnpm format` | Prettier formatting                                                          |
+| `aube dev`    | Start dev server (Turbopack)                                                 |
+| `aube build`  | Production build (runs `next build`, then Pagefind indexing via `postbuild`) |
+| `aube lint`   | ESLint (flat config, v9)                                                     |
+| `aube format` | Prettier formatting                                                          |
 
 Package manager is **pnpm 10** (enforced via `packageManager` field). Do not use npm or yarn.
 
