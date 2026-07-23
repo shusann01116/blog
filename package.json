@@ -18,7 +18,7 @@
     "next": "16.2.10",
     "nextra": "4.6.1",
     "nextra-theme-blog": "4.6.1",
-    "react": "19.2.7",
+    "react": "19.2.8",
     "react-dom": "19.2.7",
     "sharp": "0.35.3"
   },
