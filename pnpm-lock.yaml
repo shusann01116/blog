@@ -13,22 +13,22 @@ importers:
         version: 13.13.0(react@19.2.8)
       '@next/third-parties':
         specifier: 16.2.10
-        version: 16.2.10(next@16.2.10(@babel/core@7.29.7)(react-dom@19.2.7(react@19.2.8))(react@19.2.8))(react@19.2.8)
+        version: 16.2.10(next@16.2.10(@babel/core@7.29.7)(react-dom@19.2.8(react@19.2.8))(react@19.2.8))(react@19.2.8)
       next:
         specifier: 16.2.10
-        version: 16.2.10(@babel/core@7.29.7)(react-dom@19.2.7(react@19.2.8))(react@19.2.8)
+        version: 16.2.10(@babel/core@7.29.7)(react-dom@19.2.8(react@19.2.8))(react@19.2.8)
       nextra:
         specifier: 4.6.1
-        version: 4.6.1(next@16.2.10(@babel/core@7.29.7)(react-dom@19.2.7(react@19.2.8))(react@19.2.8))(react-dom@19.2.7(react@19.2.8))(react@19.2.8)(typescript@6.0.3)
+        version: 4.6.1(next@16.2.10(@babel/core@7.29.7)(react-dom@19.2.8(react@19.2.8))(react@19.2.8))(react-dom@19.2.8(react@19.2.8))(react@19.2.8)(typescript@6.0.3)
       nextra-theme-blog:
         specifier: 4.6.1
-        version: 4.6.1(next@16.2.10(@babel/core@7.29.7)(react-dom@19.2.7(react@19.2.8))(react@19.2.8))(nextra@4.6.1(next@16.2.10(@babel/core@7.29.7)(react-dom@19.2.7(react@19.2.8))(react@19.2.8))(react-dom@19.2.7(react@19.2.8))(react@19.2.8)(typescript@6.0.3))(react-dom@19.2.7(react@19.2.8))(react@19.2.8)
+        version: 4.6.1(next@16.2.10(@babel/core@7.29.7)(react-dom@19.2.8(react@19.2.8))(react@19.2.8))(nextra@4.6.1(next@16.2.10(@babel/core@7.29.7)(react-dom@19.2.8(react@19.2.8))(react@19.2.8))(react-dom@19.2.8(react@19.2.8))(react@19.2.8)(typescript@6.0.3))(react-dom@19.2.8(react@19.2.8))(react@19.2.8)
       react:
         specifier: 19.2.8
         version: 19.2.8
       react-dom:
-        specifier: 19.2.7
-        version: 19.2.7(react@19.2.8)
+        specifier: 19.2.8
+        version: 19.2.8(react@19.2.8)
       sharp:
         specifier: 0.35.3
         version: 0.35.3(@types/node@26.1.1)
@@ -3103,10 +3103,10 @@ packages:
     peerDependencies:
       react: ^17.0.0 || ^18.0.0 || ^19.0.0 || ^0.0.0-experimental
 
-  react-dom@19.2.7:
-    resolution: {integrity: sha512-t0BRVXvbiE/o20Hfw669rLbMCDWtYZLvmJigy2f0MxsXF+71pxhR3xOkspmsO8h3ZlNzyibAmtCa3l4lYKk6gQ==}
+  react-dom@19.2.8:
+    resolution: {integrity: sha512-rVprimfGBG3DR+Tq0IQG2DT5PxKth1WIGDmj5yPmlzr4YBe7uyE+Du4oVqTDXZSHGGGXRtTJEGSSePyQCMBglQ==}
     peerDependencies:
-      react: ^19.2.7
+      react: ^19.2.8
 
   react-is@16.13.1:
     resolution: {integrity: sha512-24e6ynE2H+OKt4kqsOvNd8kBpV65zoxbA4BVsEOB3ARVWQki/DHzaUoC5KuON/BiccDaCCTZBuOcfZs70kR8bQ==}
@@ -3817,18 +3817,18 @@ snapshots:
       '@floating-ui/core': 1.7.5
       '@floating-ui/utils': 0.2.11
 
-  '@floating-ui/react-dom@2.1.8(react-dom@19.2.7(react@19.2.8))(react@19.2.8)':
+  '@floating-ui/react-dom@2.1.8(react-dom@19.2.8(react@19.2.8))(react@19.2.8)':
     dependencies:
       '@floating-ui/dom': 1.7.6
       react: 19.2.8
-      react-dom: 19.2.7(react@19.2.8)
+      react-dom: 19.2.8(react@19.2.8)
 
-  '@floating-ui/react@0.26.28(react-dom@19.2.7(react@19.2.8))(react@19.2.8)':
+  '@floating-ui/react@0.26.28(react-dom@19.2.8(react@19.2.8))(react@19.2.8)':
     dependencies:
-      '@floating-ui/react-dom': 2.1.8(react-dom@19.2.7(react@19.2.8))(react@19.2.8)
+      '@floating-ui/react-dom': 2.1.8(react-dom@19.2.8(react@19.2.8))(react@19.2.8)
       '@floating-ui/utils': 0.2.11
       react: 19.2.8
-      react-dom: 19.2.7(react@19.2.8)
+      react-dom: 19.2.8(react@19.2.8)
       tabbable: 6.4.0
 
   '@floating-ui/utils@0.2.11': {}
@@ -3837,14 +3837,14 @@ snapshots:
     dependencies:
       tslib: 2.8.1
 
-  '@headlessui/react@2.2.10(react-dom@19.2.7(react@19.2.8))(react@19.2.8)':
+  '@headlessui/react@2.2.10(react-dom@19.2.8(react@19.2.8))(react@19.2.8)':
     dependencies:
-      '@floating-ui/react': 0.26.28(react-dom@19.2.7(react@19.2.8))(react@19.2.8)
-      '@react-aria/focus': 3.22.1(react-dom@19.2.7(react@19.2.8))(react@19.2.8)
-      '@react-aria/interactions': 3.28.1(react-dom@19.2.7(react@19.2.8))(react@19.2.8)
-      '@tanstack/react-virtual': 3.14.3(react-dom@19.2.7(react@19.2.8))(react@19.2.8)
+      '@floating-ui/react': 0.26.28(react-dom@19.2.8(react@19.2.8))(react@19.2.8)
+      '@react-aria/focus': 3.22.1(react-dom@19.2.8(react@19.2.8))(react@19.2.8)
+      '@react-aria/interactions': 3.28.1(react-dom@19.2.8(react@19.2.8))(react@19.2.8)
+      '@tanstack/react-virtual': 3.14.3(react-dom@19.2.8(react@19.2.8))(react@19.2.8)
       react: 19.2.8
-      react-dom: 19.2.7(react@19.2.8)
+      react-dom: 19.2.8(react@19.2.8)
       use-sync-external-store: 1.6.0(react@19.2.8)
 
   '@humanfs/core@0.19.2':
@@ -4240,9 +4240,9 @@ snapshots:
   '@next/swc-win32-x64-msvc@16.2.10':
     optional: true
 
-  '@next/third-parties@16.2.10(next@16.2.10(@babel/core@7.29.7)(react-dom@19.2.7(react@19.2.8))(react@19.2.8))(react@19.2.8)':
+  '@next/third-parties@16.2.10(next@16.2.10(@babel/core@7.29.7)(react-dom@19.2.8(react@19.2.8))(react@19.2.8))(react@19.2.8)':
     dependencies:
-      next: 16.2.10(@babel/core@7.29.7)(react-dom@19.2.7(react@19.2.8))(react@19.2.8)
+      next: 16.2.10(@babel/core@7.29.7)(react-dom@19.2.8(react@19.2.8))(react@19.2.8)
       react: 19.2.8
       third-party-capital: 1.0.20
 
@@ -4281,20 +4281,20 @@ snapshots:
   '@pagefind/windows-x64@1.5.2':
     optional: true
 
-  '@react-aria/focus@3.22.1(react-dom@19.2.7(react@19.2.8))(react@19.2.8)':
+  '@react-aria/focus@3.22.1(react-dom@19.2.8(react@19.2.8))(react@19.2.8)':
     dependencies:
       '@swc/helpers': 0.5.23
       react: 19.2.8
-      react-aria: 3.50.0(react-dom@19.2.7(react@19.2.8))(react@19.2.8)
-      react-dom: 19.2.7(react@19.2.8)
+      react-aria: 3.50.0(react-dom@19.2.8(react@19.2.8))(react@19.2.8)
+      react-dom: 19.2.8(react@19.2.8)
 
-  '@react-aria/interactions@3.28.1(react-dom@19.2.7(react@19.2.8))(react@19.2.8)':
+  '@react-aria/interactions@3.28.1(react-dom@19.2.8(react@19.2.8))(react@19.2.8)':
     dependencies:
       '@react-types/shared': 3.36.0(react@19.2.8)
       '@swc/helpers': 0.5.23
       react: 19.2.8
-      react-aria: 3.50.0(react-dom@19.2.7(react@19.2.8))(react@19.2.8)
-      react-dom: 19.2.7(react@19.2.8)
+      react-aria: 3.50.0(react-dom@19.2.8(react@19.2.8))(react@19.2.8)
+      react-dom: 19.2.8(react@19.2.8)
 
   '@react-types/shared@3.36.0(react@19.2.8)':
     dependencies:
@@ -4421,11 +4421,11 @@ snapshots:
       postcss: 8.5.22
       tailwindcss: 4.3.3
 
-  '@tanstack/react-virtual@3.14.3(react-dom@19.2.7(react@19.2.8))(react@19.2.8)':
+  '@tanstack/react-virtual@3.14.3(react-dom@19.2.8(react@19.2.8))(react@19.2.8)':
     dependencies:
       '@tanstack/virtual-core': 3.17.1
       react: 19.2.8
-      react-dom: 19.2.7(react@19.2.8)
+      react-dom: 19.2.8(react@19.2.8)
 
   '@tanstack/virtual-core@3.17.1': {}
 
@@ -6874,18 +6874,18 @@ snapshots:
 
   negotiator@1.0.0: {}
 
-  next-themes@0.4.6(react-dom@19.2.7(react@19.2.8))(react@19.2.8):
+  next-themes@0.4.6(react-dom@19.2.8(react@19.2.8))(react@19.2.8):
     dependencies:
       react: 19.2.8
-      react-dom: 19.2.7(react@19.2.8)
+      react-dom: 19.2.8(react@19.2.8)
 
-  next-view-transitions@0.3.5(next@16.2.10(@babel/core@7.29.7)(react-dom@19.2.7(react@19.2.8))(react@19.2.8))(react-dom@19.2.7(react@19.2.8))(react@19.2.8):
+  next-view-transitions@0.3.5(next@16.2.10(@babel/core@7.29.7)(react-dom@19.2.8(react@19.2.8))(react@19.2.8))(react-dom@19.2.8(react@19.2.8))(react@19.2.8):
     dependencies:
-      next: 16.2.10(@babel/core@7.29.7)(react-dom@19.2.7(react@19.2.8))(react@19.2.8)
+      next: 16.2.10(@babel/core@7.29.7)(react-dom@19.2.8(react@19.2.8))(react@19.2.8)
       react: 19.2.8
-      react-dom: 19.2.7(react@19.2.8)
+      react-dom: 19.2.8(react@19.2.8)
 
-  next@16.2.10(@babel/core@7.29.7)(react-dom@19.2.7(react@19.2.8))(react@19.2.8):
+  next@16.2.10(@babel/core@7.29.7)(react-dom@19.2.8(react@19.2.8))(react@19.2.8):
     dependencies:
       '@next/env': 16.2.10
       '@swc/helpers': 0.5.15
@@ -6893,7 +6893,7 @@ snapshots:
       caniuse-lite: 1.0.30001799
       postcss: 8.4.31
       react: 19.2.8
-      react-dom: 19.2.7(react@19.2.8)
+      react-dom: 19.2.8(react@19.2.8)
       styled-jsx: 5.1.6(@babel/core@7.29.7)(react@19.2.8)
     optionalDependencies:
       '@next/swc-darwin-arm64': 16.2.10
@@ -6909,20 +6909,20 @@ snapshots:
       - '@babel/core'
       - babel-plugin-macros
 
-  nextra-theme-blog@4.6.1(next@16.2.10(@babel/core@7.29.7)(react-dom@19.2.7(react@19.2.8))(react@19.2.8))(nextra@4.6.1(next@16.2.10(@babel/core@7.29.7)(react-dom@19.2.7(react@19.2.8))(react@19.2.8))(react-dom@19.2.7(react@19.2.8))(react@19.2.8)(typescript@6.0.3))(react-dom@19.2.7(react@19.2.8))(react@19.2.8):
+  nextra-theme-blog@4.6.1(next@16.2.10(@babel/core@7.29.7)(react-dom@19.2.8(react@19.2.8))(react@19.2.8))(nextra@4.6.1(next@16.2.10(@babel/core@7.29.7)(react-dom@19.2.8(react@19.2.8))(react@19.2.8))(react-dom@19.2.8(react@19.2.8))(react@19.2.8)(typescript@6.0.3))(react-dom@19.2.8(react@19.2.8))(react@19.2.8):
     dependencies:
-      next: 16.2.10(@babel/core@7.29.7)(react-dom@19.2.7(react@19.2.8))(react@19.2.8)
-      next-themes: 0.4.6(react-dom@19.2.7(react@19.2.8))(react@19.2.8)
-      next-view-transitions: 0.3.5(next@16.2.10(@babel/core@7.29.7)(react-dom@19.2.7(react@19.2.8))(react@19.2.8))(react-dom@19.2.7(react@19.2.8))(react@19.2.8)
-      nextra: 4.6.1(next@16.2.10(@babel/core@7.29.7)(react-dom@19.2.7(react@19.2.8))(react@19.2.8))(react-dom@19.2.7(react@19.2.8))(react@19.2.8)(typescript@6.0.3)
+      next: 16.2.10(@babel/core@7.29.7)(react-dom@19.2.8(react@19.2.8))(react@19.2.8)
+      next-themes: 0.4.6(react-dom@19.2.8(react@19.2.8))(react@19.2.8)
+      next-view-transitions: 0.3.5(next@16.2.10(@babel/core@7.29.7)(react-dom@19.2.8(react@19.2.8))(react@19.2.8))(react-dom@19.2.8(react@19.2.8))(react@19.2.8)
+      nextra: 4.6.1(next@16.2.10(@babel/core@7.29.7)(react-dom@19.2.8(react@19.2.8))(react@19.2.8))(react-dom@19.2.8(react@19.2.8))(react@19.2.8)(typescript@6.0.3)
       react: 19.2.8
       react-compiler-runtime: 19.1.0-rc.3(react@19.2.8)
-      react-dom: 19.2.7(react@19.2.8)
+      react-dom: 19.2.8(react@19.2.8)
 
-  nextra@4.6.1(next@16.2.10(@babel/core@7.29.7)(react-dom@19.2.7(react@19.2.8))(react@19.2.8))(react-dom@19.2.7(react@19.2.8))(react@19.2.8)(typescript@6.0.3):
+  nextra@4.6.1(next@16.2.10(@babel/core@7.29.7)(react-dom@19.2.8(react@19.2.8))(react@19.2.8))(react-dom@19.2.8(react@19.2.8))(react@19.2.8)(typescript@6.0.3):
     dependencies:
       '@formatjs/intl-localematcher': 0.6.2
-      '@headlessui/react': 2.2.10(react-dom@19.2.7(react@19.2.8))(react@19.2.8)
+      '@headlessui/react': 2.2.10(react-dom@19.2.8(react@19.2.8))(react@19.2.8)
       '@mdx-js/mdx': 3.1.1
       '@napi-rs/simple-git': 0.1.22
       '@shikijs/twoslash': 3.23.0(typescript@6.0.3)
@@ -6940,11 +6940,11 @@ snapshots:
       mdast-util-gfm: 3.1.0
       mdast-util-to-hast: 13.2.1
       negotiator: 1.0.0
-      next: 16.2.10(@babel/core@7.29.7)(react-dom@19.2.7(react@19.2.8))(react@19.2.8)
+      next: 16.2.10(@babel/core@7.29.7)(react-dom@19.2.8(react@19.2.8))(react@19.2.8)
       react: 19.2.8
       react-compiler-runtime: 19.1.0-rc.3(react@19.2.8)
-      react-dom: 19.2.7(react@19.2.8)
-      react-medium-image-zoom: 5.4.8(react-dom@19.2.7(react@19.2.8))(react@19.2.8)
+      react-dom: 19.2.8(react@19.2.8)
+      react-medium-image-zoom: 5.4.8(react-dom@19.2.8(react@19.2.8))(react@19.2.8)
       rehype-katex: 7.0.1
       rehype-pretty-code: 0.14.1(shiki@3.23.0)
       rehype-raw: 7.0.0
@@ -7157,7 +7157,7 @@ snapshots:
 
   queue-microtask@1.2.3: {}
 
-  react-aria@3.50.0(react-dom@19.2.7(react@19.2.8))(react@19.2.8):
+  react-aria@3.50.0(react-dom@19.2.8(react@19.2.8))(react@19.2.8):
     dependencies:
       '@internationalized/date': 3.12.2
       '@internationalized/number': 3.6.7
@@ -7167,7 +7167,7 @@ snapshots:
       aria-hidden: 1.2.6
       clsx: 2.1.1
       react: 19.2.8
-      react-dom: 19.2.7(react@19.2.8)
+      react-dom: 19.2.8(react@19.2.8)
       react-stately: 3.48.0(react@19.2.8)
       use-sync-external-store: 1.6.0(react@19.2.8)
 
@@ -7175,17 +7175,17 @@ snapshots:
     dependencies:
       react: 19.2.8
 
-  react-dom@19.2.7(react@19.2.8):
+  react-dom@19.2.8(react@19.2.8):
     dependencies:
       react: 19.2.8
       scheduler: 0.27.0
 
   react-is@16.13.1: {}
 
-  react-medium-image-zoom@5.4.8(react-dom@19.2.7(react@19.2.8))(react@19.2.8):
+  react-medium-image-zoom@5.4.8(react-dom@19.2.8(react@19.2.8))(react@19.2.8):
     dependencies:
       react: 19.2.8
-      react-dom: 19.2.7(react@19.2.8)
+      react-dom: 19.2.8(react@19.2.8)
 
   react-stately@3.48.0(react@19.2.8):
     dependencies:
