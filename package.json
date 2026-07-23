@@ -34,7 +34,7 @@
     "globals": "17.7.0",
     "lefthook": "2.1.10",
     "pagefind": "1.5.2",
-    "postcss": "8.5.20",
+    "postcss": "8.5.22",
     "prettier": "3.9.6",
     "tailwindcss": "4.3.3",
     "typescript": "6.0.3",
