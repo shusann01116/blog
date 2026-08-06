@@ -24,12 +24,10 @@
     "sharp": "0.35.3"
   },
   "devDependencies": {
-    "@eslint/js": "10.0.1",
     "@tailwindcss/postcss": "4.3.3",
     "@types/node": "26.1.2",
     "@types/react": "19.2.18",
     "autoprefixer": "10.5.4",
-    "globals": "17.9.0",
     "lefthook": "2.1.10",
     "oxlint": "1.77.0",
     "oxlint-tsgolint": "7.0.2001",

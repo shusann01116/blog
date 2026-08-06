@@ -1,10 +1,16 @@
 import Link from "next/link";
 import { PostCard } from "nextra-theme-blog";
 import { getPosts, getTags } from "@/utils/get-posts";
-import { CSSProperties, useMemo } from "react";
+import type { CSSProperties } from "react";
 
 export const metadata = {
   title: "Posts",
+};
+
+const tagListStyle: CSSProperties = {
+  display: "flex",
+  flexWrap: "wrap",
+  gap: ".5rem",
 };
 
 export default async function PostsPage() {
@@ -19,14 +25,10 @@ export default async function PostsPage() {
     {},
   );
 
-  const style: CSSProperties = useMemo(() => {
-    return { display: "flex", flexWrap: "wrap", gap: ".5rem" };
-  }, []);
-
   return (
     <div data-pagefind-ignore="all">
       <h1>{metadata.title}</h1>
-      <div className="not-prose" style={style}>
+      <div className="not-prose" style={tagListStyle}>
         {Object.entries(allTags).map(([tag, count]) => (
           <Link key={tag} href={`/tags/${tag}`} className="nextra-tag">
             {tag} ({count})

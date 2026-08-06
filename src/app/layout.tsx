@@ -12,7 +12,6 @@ import {
   SiZenn,
 } from "@icons-pack/react-simple-icons";
 import { Noto_Sans_JP } from "next/font/google";
-import { useMemo } from "react";
 
 const NotoSansJP = Noto_Sans_JP({ subsets: ["latin"] });
 
@@ -20,10 +19,9 @@ export const metadata = {
   title: "shusann01116's blog",
 };
 
+const backgroundColor = { dark: "#0f172a", light: "#fefefa" };
+
 export default async function RootLayout({ children }: LayoutProps<"/">) {
-  const backgroundColor = useMemo(() => {
-    return { dark: "#0f172a", light: "#fefefa" };
-  }, []);
   return (
     <html lang="en" suppressHydrationWarning>
       <Head backgroundColor={backgroundColor}>

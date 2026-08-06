@@ -8,14 +8,15 @@ Personal blog built with **Next.js 16** + **Nextra 4** (MDX blog theme). Content
 
 ## Commands
 
-| Command       | Description                                                                  |
-| ------------- | ---------------------------------------------------------------------------- |
-| `aube dev`    | Start dev server (Turbopack)                                                 |
-| `aube build`  | Production build (runs `next build`, then Pagefind indexing via `postbuild`) |
-| `aube lint`   | ESLint (flat config, v9)                                                     |
-| `aube format` | Prettier formatting                                                          |
+| Command         | Description                                                                  |
+| --------------- | ---------------------------------------------------------------------------- |
+| `aube dev`      | Start dev server (Turbopack)                                                 |
+| `aube build`    | Production build (runs `next build`, then Pagefind indexing via `postbuild`) |
+| `aube lint`     | oxlint (config in `.oxlintrc.json`)                                          |
+| `aube lint:fix` | oxlint with autofix — see the Server Components caveat below                 |
+| `aube format`   | Prettier formatting                                                          |
 
-Package manager is **pnpm 10** (enforced via `packageManager` field). Do not use npm or yarn.
+Package manager is **pnpm 11** (enforced via `packageManager` field). Do not use npm or yarn.
 
 There are no tests configured in this project.
 
@@ -33,7 +34,8 @@ There are no tests configured in this project.
 - `src/app/tags/[tag]/page.tsx` — Dynamic tag filtering pages
 - `src/app/rss.xml/route.ts` — RSS feed route handler
 - `src/utils/get-posts.ts` — Post fetching/sorting utility using Nextra's `getPageMap`
-- `theme.config.jsx` — Nextra theme customization (header, footer, dark mode)
+- `src/mdx-components.mjs` — MDX component overrides (Nextra 4 replaced `theme.config.jsx`; theme
+  customization now lives in `src/app/layout.tsx` via `<Layout>`, `<Navbar>`, `<Footer>`)
 
 ### Blog post format
 
@@ -56,7 +58,21 @@ author: shusann01116
 ## Configuration notes
 
 - TypeScript strict mode is enabled
-- ESLint uses flat config format (`eslint.config.mjs`), ignoring `.next/`, `node_modules/`, `_pagefind/`
+- oxlint config lives in `.oxlintrc.json` with the `correctness`, `perf`, and `suspicious`
+  categories set to `error`, and type-aware linting enabled via `oxlint-tsgolint`
 - Nextra config in `next.config.mjs` enables copy-code buttons and reading time
 - Lefthook pre-commit hook runs Prettier on staged files (`lefthook.yml`)
 - Content is primarily in Japanese
+
+### Never use React hooks to satisfy `react-perf` lint rules
+
+Everything under `src/app/` is an **async Server Component**, where React hooks do not exist.
+The `react-perf/jsx-no-new-object-as-prop` rule (enabled via the `perf` category) flags inline
+object literals passed as JSX props. Fix it by hoisting the object to a **module-scope
+constant** — never by wrapping it in `useMemo`.
+
+A `useMemo` placed _before_ the component's first `await` appears to work, because the async
+function's synchronous prologue still runs inside React's render scope. Placed _after_ an
+`await`, it crashes the production prerender with
+`TypeError: Cannot read properties of null (reading 'useMemo')`, since React has already torn
+down the hook dispatcher. Be especially careful with `aube lint:fix`, which can reintroduce this.
