@@ -35,7 +35,7 @@
     "postcss": "8.5.25",
     "prettier": "3.9.6",
     "tailwindcss": "4.3.3",
-    "typescript": "6.0.3"
+    "typescript": "7.0.2"
   },
   "packageManager": "pnpm@11.20.0"
 }
