@@ -6,12 +6,12 @@ const withNextra = nextra({
 });
 
 export default withNextra({
-  reactStrictMode: true,
   cleanDistDir: true,
-  typedRoutes: true,
+  reactStrictMode: true,
   turbopack: {
     resolveAlias: {
       "next-mdx-import-source-file": "./src/mdx-components.mjs",
     },
   },
+  typedRoutes: true,
 });

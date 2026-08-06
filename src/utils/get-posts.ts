@@ -8,7 +8,7 @@ export async function getPosts() {
   });
   return directories
     .filter((post) => post.name !== "index")
-    .sort((a, b) => {
+    .toSorted((a, b) => {
       const dateA = new Date(a.frontMatter?.date ?? "").getTime();
       const dateB = new Date(b.frontMatter?.date ?? "").getTime();
       return dateB - dateA;

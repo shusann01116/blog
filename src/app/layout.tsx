@@ -5,13 +5,14 @@ import "nextra-theme-blog/style.css";
 import "@/styles/global.css";
 import { GoogleAnalytics } from "@next/third-parties/google";
 import {
-  SiZenn,
-  SiQiita,
   SiGithub,
+  SiQiita,
   SiRss,
   SiX,
+  SiZenn,
 } from "@icons-pack/react-simple-icons";
 import { Noto_Sans_JP } from "next/font/google";
+import { useMemo } from "react";
 
 const NotoSansJP = Noto_Sans_JP({ subsets: ["latin"] });
 
@@ -20,9 +21,12 @@ export const metadata = {
 };
 
 export default async function RootLayout({ children }: LayoutProps<"/">) {
+  const backgroundColor = useMemo(() => {
+    return { dark: "#0f172a", light: "#fefefa" };
+  }, []);
   return (
     <html lang="en" suppressHydrationWarning>
-      <Head backgroundColor={{ dark: "#0f172a", light: "#fefefa" }}>
+      <Head backgroundColor={backgroundColor}>
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <GoogleAnalytics gaId="G-2NJX07FBDF" />
       </Head>

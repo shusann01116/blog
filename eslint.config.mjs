@@ -7,13 +7,13 @@ import { defineConfig, globalIgnores } from "eslint/config";
 export default defineConfig([
   globalIgnores(["**.next/**", "**/node_modules/**", "**/_pagefind/**"]),
   {
+    plugins: {
+      pluginReact,
+    },
     settings: {
       react: {
         version: "detect",
       },
-    },
-    plugins: {
-      pluginReact,
     },
   },
   {

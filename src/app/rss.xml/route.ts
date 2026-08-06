@@ -1,23 +1,25 @@
 import { getPosts } from "@/utils/get-posts";
 
 const CONFIG = {
-  title: "shusann01116's blog",
-  siteUrl: "https://blog.shusann01116.dev",
   description: "Latest blog posts",
   lang: "en-us",
+  siteUrl: "https://blog.shusann01116.dev",
+  title: "shusann01116's blog",
 };
 
 export async function GET() {
   const allPosts = await getPosts();
   const posts = allPosts
-    .map(
-      (post) => `    <item>
-        <title>${post.title}</title>
+    .map((post) => {
+      // oxlint-disable-next-line typescript/no-base-to-string
+      const title = String(post.title);
+      return `<item>
+        <title>${title}</title>
         <description>${post.frontMatter.description}</description>
         <link>${CONFIG.siteUrl}${post.route}</link>
         <pubDate>${new Date(post.frontMatter.date).toUTCString()}</pubDate>
-    </item>`,
-    )
+    </item>`;
+    })
     .join("\n");
   const xml = `<?xml version="1.0" encoding="UTF-8" ?>
 <rss version="2.0">
