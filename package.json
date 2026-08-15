@@ -15,8 +15,8 @@
   },
   "dependencies": {
     "@icons-pack/react-simple-icons": "13.13.0",
-    "@next/third-parties": "16.3.0",
-    "next": "16.3.0",
+    "@next/third-parties": "16.3.1",
+    "next": "16.3.1",
     "nextra": "4.6.1",
     "nextra-theme-blog": "4.6.1",
     "react": "19.2.8",
