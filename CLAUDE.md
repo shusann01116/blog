@@ -64,6 +64,16 @@ author: shusann01116
 - Lefthook pre-commit hook runs Prettier on staged files (`lefthook.yml`)
 - Content is primarily in Japanese
 
+### Renovate must stay behind pnpm's `minimumReleaseAge`
+
+pnpm 11 enforces a supply-chain policy that rejects any lockfile entry published within the
+last **24 hours** (`minimumReleaseAge`, default `1440` minutes). It fails `pnpm install` outright
+with `ERR_PNPM_MINIMUM_RELEASE_AGE_VIOLATION`, so a Renovate PR raised right after a release
+breaks the Vercel deployment during install — before the build ever starts.
+
+`renovate.json` therefore sets `minimumReleaseAge: "3 days"`, which keeps every lockfile Renovate
+writes comfortably past pnpm's cutoff. Never lower it below pnpm's own setting.
+
 ### Never use React hooks to satisfy `react-perf` lint rules
 
 Everything under `src/app/` is an **async Server Component**, where React hooks do not exist.
