@@ -29,7 +29,7 @@
     "@types/react": "19.2.18",
     "autoprefixer": "10.5.4",
     "lefthook": "2.1.12",
-    "oxlint": "1.80.0",
+    "oxlint": "1.81.0",
     "oxlint-tsgolint": "7.0.2001",
     "pagefind": "1.5.2",
     "postcss": "8.5.26",
