@@ -1,4 +1,4 @@
-import { mkdir, mkdtemp, rm, writeFile } from "node:fs/promises";
+import { mkdir, mkdtemp, rm, symlink, writeFile } from "node:fs/promises";
 import { tmpdir } from "node:os";
 import { join } from "node:path";
 
@@ -36,6 +36,22 @@ test("post discovery ignores support directories without page.mdx", async () => 
     await expect(discoverPostSlugs(postsDirectory)).resolves.toEqual([
       "published-post",
     ]);
+  } finally {
+    await rm(postsDirectory, { recursive: true, force: true });
+  }
+});
+
+test("post discovery reports filesystem failures", async () => {
+  const postsDirectory = await mkdtemp(join(tmpdir(), "blog-posts-"));
+  const postDirectory = join(postsDirectory, "unreadable-post");
+
+  try {
+    await mkdir(postDirectory);
+    await symlink("page.mdx", join(postDirectory, "page.mdx"));
+
+    await expect(discoverPostSlugs(postsDirectory)).rejects.toMatchObject({
+      code: "ELOOP",
+    });
   } finally {
     await rm(postsDirectory, { recursive: true, force: true });
   }

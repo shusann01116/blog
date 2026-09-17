@@ -73,8 +73,15 @@ export async function discoverPostSlugs(
             resolve(postsDirectory, entry.name, "page.mdx"),
           );
           return page.isFile() ? entry.name : null;
-        } catch {
-          return null;
+        } catch (error) {
+          if (
+            error instanceof Error &&
+            "code" in error &&
+            (error.code === "ENOENT" || error.code === "ENOTDIR")
+          ) {
+            return null;
+          }
+          throw error;
         }
       }),
   );
