@@ -39,6 +39,34 @@ test("storage を利用できない場合も OS の設定で表示する", async
   await expect(page.locator("html")).toHaveCSS("color-scheme", "light");
 });
 
+test("コードの Shiki 配色と文字装飾をライト・ダークテーマへ反映する", async ({
+  page,
+}) => {
+  await page.emulateMedia({ colorScheme: "light" });
+  await page.goto("/posts/2024-09-25-another-post");
+
+  const codeBlock = page.locator(".code-block pre").first();
+  const propertyToken = codeBlock
+    .locator('span[style*="--shiki-light"]')
+    .filter({ hasText: '"runtimeExecutable"' })
+    .first();
+  const commentToken = codeBlock
+    .locator('span[style*="--shiki-light-font-style"]')
+    .filter({ hasText: "<--" })
+    .first();
+
+  await expect(codeBlock).toHaveCSS("background-color", "rgb(255, 255, 255)");
+  await expect(propertyToken).toHaveCSS("color", "rgb(0, 92, 197)");
+  await expect(commentToken).toHaveCSS("font-style", "italic");
+
+  await page.getByRole("button", { name: "テーマを切り替え" }).click();
+
+  await expect(codeBlock).toHaveCSS("background-color", "rgb(36, 41, 46)");
+  await expect(propertyToken).toHaveCSS("color", "rgb(121, 184, 255)");
+  await expect(commentToken).toHaveCSS("color", "rgb(253, 174, 183)");
+  await expect(commentToken).toHaveCSS("font-style", "italic");
+});
+
 for (const viewport of [
   { width: 390, height: 844 },
   { width: 1280, height: 900 },

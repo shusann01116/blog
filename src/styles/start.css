@@ -346,6 +346,32 @@ article > header > div {
   line-height: 1.65;
 }
 
+.code-block pre[data-theme] {
+  background-color: var(--shiki-light-bg, var(--code-bg));
+  color: var(--shiki-light, var(--code-text));
+}
+
+.code-block [data-theme] span {
+  background-color: var(--shiki-light-bg, transparent);
+  color: var(--shiki-light, inherit);
+  font-style: var(--shiki-light-font-style, normal);
+  font-weight: var(--shiki-light-font-weight, normal);
+  text-decoration: var(--shiki-light-text-decoration, none);
+}
+
+.dark .code-block pre[data-theme] {
+  background-color: var(--shiki-dark-bg, var(--code-bg));
+  color: var(--shiki-dark, var(--code-text));
+}
+
+.dark .code-block [data-theme] span {
+  background-color: var(--shiki-dark-bg, transparent);
+  color: var(--shiki-dark, inherit);
+  font-style: var(--shiki-dark-font-style, normal);
+  font-weight: var(--shiki-dark-font-weight, normal);
+  text-decoration: var(--shiki-dark-text-decoration, none);
+}
+
 .code-block__copy {
   position: absolute;
   z-index: 1;

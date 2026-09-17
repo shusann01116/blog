@@ -22,13 +22,20 @@ const modulePath = "/_pagefind/pagefind.js";
 let moduleAttempt = 0;
 let pendingModule: Promise<PagefindModule> | undefined;
 
+function invalidatePagefind(attempt: number): void {
+  if (attempt !== moduleAttempt) return;
+
+  pendingModule = undefined;
+  moduleAttempt += 1;
+}
+
 function loadPagefind(): Promise<PagefindModule> {
   if (pendingModule) return pendingModule;
 
+  const attempt = moduleAttempt;
   const url = `${modulePath}?attempt=${moduleAttempt}`;
   pendingModule = import(/* @vite-ignore */ url).catch((error: unknown) => {
-    pendingModule = undefined;
-    moduleAttempt += 1;
+    invalidatePagefind(attempt);
     throw error;
   });
   return pendingModule;
@@ -46,15 +53,22 @@ function cleanUrl(url: string): string {
 }
 
 export async function searchPosts(query: string): Promise<SearchResult[]> {
-  const pagefind = await loadPagefind();
-  const result = await pagefind.search(query);
-  const items = await Promise.all(
-    result.results.slice(0, 20).map((entry) => entry.data()),
-  );
+  const attempt = moduleAttempt;
 
-  return items.map((item) => ({
-    url: cleanUrl(item.url),
-    title: item.meta.title ?? item.url,
-    excerpt: plainText(item.excerpt),
-  }));
+  try {
+    const pagefind = await loadPagefind();
+    const result = await pagefind.search(query);
+    const items = await Promise.all(
+      result.results.slice(0, 20).map((entry) => entry.data()),
+    );
+
+    return items.map((item) => ({
+      url: cleanUrl(item.url),
+      title: item.meta.title ?? item.url,
+      excerpt: plainText(item.excerpt),
+    }));
+  } catch (error) {
+    invalidatePagefind(attempt);
+    throw error;
+  }
 }
