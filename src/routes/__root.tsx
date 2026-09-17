@@ -9,7 +9,11 @@ import {
 
 import styleUrl from "@/styles/start.css?url";
 
+import { SiteLayout } from "@/components/site-layout";
 import { site } from "@/lib/site";
+import { themeInitScript } from "@/lib/theme";
+
+const themeScriptContent = { __html: themeInitScript };
 
 export const Route = createRootRoute({
   beforeLoad: ({ location }) => {
@@ -32,12 +36,15 @@ export const Route = createRootRoute({
     ],
   }),
   component: () => (
-    <html lang="ja">
+    <html lang="ja" suppressHydrationWarning>
       <head>
+        <script dangerouslySetInnerHTML={themeScriptContent} />
         <HeadContent />
       </head>
       <body>
-        <Outlet />
+        <SiteLayout>
+          <Outlet />
+        </SiteLayout>
         <Scripts />
       </body>
     </html>

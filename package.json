@@ -20,6 +20,8 @@
     "postbuild": "pagefind --site .next/server/app --output-path public/_pagefind"
   },
   "dependencies": {
+    "@base-ui/react": "1.8.0",
+    "@fontsource/noto-sans-jp": "5.3.0",
     "@icons-pack/react-simple-icons": "13.15.1",
     "@next/third-parties": "16.3.4",
     "@tanstack/react-router": "1.170.34",
