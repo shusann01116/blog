@@ -24,10 +24,12 @@
     "sharp": "0.35.4"
   },
   "devDependencies": {
+    "@playwright/test": "1.63.0",
     "@tailwindcss/postcss": "4.3.3",
     "@types/node": "26.4.1",
     "@types/react": "19.2.18",
     "autoprefixer": "10.5.5",
+    "cheerio": "1.2.0",
     "lefthook": "2.1.12",
     "oxlint": "1.81.0",
     "oxlint-tsgolint": "7.0.2001",
@@ -35,6 +37,7 @@
     "postcss": "8.5.28",
     "prettier": "3.9.6",
     "tailwindcss": "4.3.3",
+    "tsx": "4.23.13",
     "typescript": "6.0.3"
   },
   "packageManager": "pnpm@11.26.0"

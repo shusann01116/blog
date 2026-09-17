@@ -145,3 +145,5 @@ dist
 
 _pagefind/
 .worktrees/
+playwright-report/
+test-results/
