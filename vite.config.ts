@@ -7,24 +7,49 @@ import rehypeSlug from "rehype-slug";
 import remarkFrontmatter from "remark-frontmatter";
 import remarkGfm from "remark-gfm";
 import remarkMdxFrontmatter from "remark-mdx-frontmatter";
+import { readdirSync } from "node:fs";
 import { defineConfig } from "vite";
 
 import { contentPlugin } from "./scripts/content/vite-plugin.ts";
+
+const mdxPlugin = {
+  ...mdx({
+    include: "**/src/content/**/*.mdx",
+    remarkPlugins: [remarkFrontmatter, remarkMdxFrontmatter, remarkGfm],
+    rehypePlugins: [
+      rehypeSlug,
+      [
+        rehypePrettyCode,
+        { theme: { light: "github-light", dark: "github-dark" } },
+      ],
+    ],
+  }),
+  enforce: "pre" as const,
+};
+
+const articlePages = readdirSync(
+  new URL("./src/content/posts", import.meta.url),
+)
+  .filter((fileName) => fileName.endsWith(".mdx"))
+  .map((fileName) => ({ path: `/posts/${fileName.slice(0, -4)}` }));
 
 export default defineConfig({
   server: { port: 3101 },
   resolve: { alias: { "@": new URL("./src", import.meta.url).pathname } },
   plugins: [
     contentPlugin(),
-    mdx({
-      remarkPlugins: [remarkFrontmatter, remarkMdxFrontmatter, remarkGfm],
-      rehypePlugins: [rehypeSlug, rehypePrettyCode],
-    }),
+    mdxPlugin,
     cloudflare({ viteEnvironment: { name: "ssr" } }),
     tanstackStart({
-      prerender: { enabled: true, failOnError: true, crawlLinks: false },
-      pages: [{ path: "/" }],
+      prerender: {
+        enabled: true,
+        failOnError: true,
+        crawlLinks: false,
+        autoStaticPathsDiscovery: false,
+        autoSubfolderIndex: false,
+      },
+      pages: [{ path: "/" }, ...articlePages],
     }),
-    react({ include: /\.(?:js|jsx|md|mdx|ts|tsx)$/ }),
+    react({ include: /\.(mdx|[jt]sx?)$/ }),
   ],
 });

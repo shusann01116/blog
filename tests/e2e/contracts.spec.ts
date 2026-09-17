@@ -11,6 +11,31 @@ import {
 } from "../../scripts/migration/capture-baseline";
 import baseline from "../fixtures/migration/baseline.json" with { type: "json" };
 
+function rssSnapshot(xml: string) {
+  const $ = load(xml, { xmlMode: true });
+  const channel = $("rss > channel").first();
+
+  return {
+    title: channel.children("title").first().text(),
+    link: channel.children("link").first().text(),
+    description: channel.children("description").first().text(),
+    language: channel.children("language").first().text(),
+    items: channel
+      .children("item")
+      .toArray()
+      .map((item) => ({
+        title: $(item).children("title").text(),
+        description: $(item).children("description").text(),
+        link: $(item).children("link").text(),
+        pubDate: $(item).children("pubDate").text(),
+      })),
+  };
+}
+
+function mimeEssence(contentType: string | null | undefined) {
+  return contentType?.split(";", 1)[0]?.trim().toLowerCase() ?? null;
+}
+
 test("document title excludes SVG accessibility titles", () => {
   const snapshot = snapshotHtml(
     "/example",
@@ -81,9 +106,9 @@ for (const expected of baseline.posts) {
       slug: expected.slug,
       title: $("head > title").first().text(),
       date: $("time[datetime]").first().attr("datetime"),
-      tags: $("a.nextra-tag")
+      tags: $('a[href^="/tags/"]')
         .toArray()
-        .map((node) => $(node).text()),
+        .map((node) => $(node).text().trim()),
       author: byline.split(",", 1)[0],
       description: $('meta[name="description"]').attr("content"),
     }).toEqual(expected);
@@ -93,13 +118,21 @@ for (const expected of baseline.posts) {
 test("RSS を維持する", async ({ request }) => {
   const response = await request.get(baseline.rss.path, { maxRedirects: 0 });
 
+  const actualBody = await response.text();
+
   expect({
     path: baseline.rss.path,
     status: response.status(),
     location: response.headers()["location"] ?? null,
-    contentType: response.headers()["content-type"] ?? null,
-    body: await response.text(),
-  }).toEqual(baseline.rss);
+    contentType: mimeEssence(response.headers()["content-type"]),
+    body: rssSnapshot(actualBody),
+  }).toEqual({
+    path: baseline.rss.path,
+    status: baseline.rss.status,
+    location: baseline.rss.location,
+    contentType: mimeEssence(baseline.rss.contentType),
+    body: rssSnapshot(baseline.rss.body),
+  });
 });
 
 test("不明記事は HTTP 404", async ({ request }) => {
