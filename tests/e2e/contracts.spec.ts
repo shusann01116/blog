@@ -1,7 +1,14 @@
+import { mkdir, mkdtemp, rm, writeFile } from "node:fs/promises";
+import { tmpdir } from "node:os";
+import { join } from "node:path";
+
 import { expect, test } from "@playwright/test";
 import { load } from "cheerio";
 
-import { snapshotHtml } from "../../scripts/migration/capture-baseline";
+import {
+  discoverPostSlugs,
+  snapshotHtml,
+} from "../../scripts/migration/capture-baseline";
 import baseline from "../fixtures/migration/baseline.json" with { type: "json" };
 
 test("document title excludes SVG accessibility titles", () => {
@@ -13,6 +20,25 @@ test("document title excludes SVG accessibility titles", () => {
   );
 
   expect(snapshot.title).toBe("Document title");
+});
+
+test("post discovery ignores support directories without page.mdx", async () => {
+  const postsDirectory = await mkdtemp(join(tmpdir(), "blog-posts-"));
+
+  try {
+    await mkdir(join(postsDirectory, "published-post"));
+    await writeFile(
+      join(postsDirectory, "published-post", "page.mdx"),
+      "# Post",
+    );
+    await mkdir(join(postsDirectory, "support-files"));
+
+    await expect(discoverPostSlugs(postsDirectory)).resolves.toEqual([
+      "published-post",
+    ]);
+  } finally {
+    await rm(postsDirectory, { recursive: true, force: true });
+  }
 });
 
 for (const expected of baseline.pages) {

@@ -3,7 +3,7 @@
 Next.js 版の本番ビルドを Node.js 24.21.0 で起動し、公開レスポンスを比較基準として保存する。
 
 ```sh
-pnpm build
+TZ=UTC pnpm build
 TZ=UTC pnpm exec next start -p 3100
 pnpm exec tsx scripts/migration/capture-baseline.ts \
   --origin http://localhost:3100 \
@@ -18,7 +18,8 @@ TEST_ORIGIN=http://localhost:3100 \
 
 | 項目                       | 確認結果                        | 根拠                                       |
 | -------------------------- | ------------------------------- | ------------------------------------------ |
-| 公開 origin / ドメイン割当 | `https://blog.shusann01116.dev` | `CLAUDE.md` と RSS の `siteUrl`            |
+| 設定上の公開 origin        | `https://blog.shusann01116.dev` | `CLAUDE.md` と RSS の `siteUrl`            |
+| 実際のカスタムドメイン割当 | 未確認                          | Cloudflare アカウントを確認していない      |
 | 旧サービス名               | 未確認                          | リポジトリにデプロイ設定やサービス名がない |
 | 旧デプロイ識別子           | 未確認                          | リポジトリにデプロイ ID がない             |
 

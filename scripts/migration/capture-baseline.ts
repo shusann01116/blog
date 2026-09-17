@@ -1,4 +1,4 @@
-import { mkdir, readdir, writeFile } from "node:fs/promises";
+import { mkdir, readdir, stat, writeFile } from "node:fs/promises";
 import { dirname, resolve } from "node:path";
 import { pathToFileURL } from "node:url";
 
@@ -57,15 +57,29 @@ function getArguments(argv: string[]) {
   return { origin: new URL(origin), output };
 }
 
-async function getPostSlugs() {
-  const entries = await readdir(resolve("src/app/posts"), {
+export async function discoverPostSlugs(
+  postsDirectory = resolve("src/app/posts"),
+) {
+  const entries = await readdir(postsDirectory, {
     withFileTypes: true,
   });
 
-  return entries
-    .filter((entry) => entry.isDirectory())
-    .map((entry) => entry.name)
-    .toSorted();
+  const candidates = await Promise.all(
+    entries
+      .filter((entry) => entry.isDirectory())
+      .map(async (entry) => {
+        try {
+          const page = await stat(
+            resolve(postsDirectory, entry.name, "page.mdx"),
+          );
+          return page.isFile() ? entry.name : null;
+        } catch {
+          return null;
+        }
+      }),
+  );
+
+  return candidates.filter((slug): slug is string => slug !== null).toSorted();
 }
 
 function addDocumentVariants(paths: string[]) {
@@ -143,7 +157,7 @@ async function capturePost(origin: URL, slug: string): Promise<PostSnapshot> {
 }
 
 async function captureBaseline(origin: URL) {
-  const slugs = await getPostSlugs();
+  const slugs = await discoverPostSlugs();
   const documentPaths = [
     ...EXTRA_DOCUMENT_PATHS,
     ...slugs.map((slug) => `/posts/${slug}`),
