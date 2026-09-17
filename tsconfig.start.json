@@ -3,10 +3,13 @@
   "compilerOptions": {
     "plugins": [],
     "target": "ES2022",
-    "types": ["vite/client"]
+    "types": ["vite/client", "node"]
   },
   "include": [
     "src/start-env.d.ts",
+    "src/mdx.d.ts",
+    "src/lib/**/*.ts",
+    "src/generated/**/*.ts",
     "src/router.tsx",
     "src/routeTree.gen.ts",
     "src/routes/**/*.tsx"

@@ -149,3 +149,4 @@ playwright-report/
 test-results/
 .wrangler/
 src/routeTree.gen.ts
+src/generated/
