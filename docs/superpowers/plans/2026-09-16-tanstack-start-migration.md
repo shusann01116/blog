@@ -468,7 +468,7 @@ test("テーマを再読み込み後も維持する", async ({ page }) => {
 
 - Create: `scripts/build/search.ts`, `src/lib/pagefind.ts`, `src/components/search-dialog.tsx`
 - Create: `tests/e2e/search.spec.ts`
-- Modify: `vite.config.ts`, `package.json`, `src/components/site-layout.tsx`, `src/components/post-body.tsx`, `src/routes/__root.tsx`
+- Modify: `vite.config.ts`, `package.json`, `src/components/site-layout.tsx`, `src/components/post-body.tsx`
 
 **Interfaces:** `searchPosts(query: string): Promise<{ url: string; title: string; excerpt: string }[]>`。`SearchDialog()` は遅延読み込み、検索結果、エラーと再試行を担当する。
 
