@@ -9,6 +9,8 @@ import {
 
 import styleUrl from "@/styles/start.css?url";
 
+import { Analytics } from "@/components/analytics";
+import { ErrorView, NotFoundView } from "@/components/error-view";
 import { SiteLayout } from "@/components/site-layout";
 import { site } from "@/lib/site";
 import { themeInitScript } from "@/lib/theme";
@@ -35,6 +37,8 @@ export const Route = createRootRoute({
       { rel: "icon", href: "/favicon.ico" },
     ],
   }),
+  errorComponent: ErrorView,
+  notFoundComponent: NotFoundView,
   component: () => (
     <html lang="ja" suppressHydrationWarning>
       <head>
@@ -45,6 +49,7 @@ export const Route = createRootRoute({
         <SiteLayout>
           <Outlet />
         </SiteLayout>
+        <Analytics />
         <Scripts />
       </body>
     </html>
