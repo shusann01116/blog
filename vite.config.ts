@@ -7,10 +7,10 @@ import rehypeSlug from "rehype-slug";
 import remarkFrontmatter from "remark-frontmatter";
 import remarkGfm from "remark-gfm";
 import remarkMdxFrontmatter from "remark-mdx-frontmatter";
-import { readdirSync } from "node:fs";
 import { defineConfig } from "vite";
 
 import { contentPlugin } from "./scripts/content/vite-plugin.ts";
+import pages from "./src/generated/pages.json" with { type: "json" };
 
 const mdxPlugin = {
   ...mdx({
@@ -27,12 +27,6 @@ const mdxPlugin = {
   enforce: "pre" as const,
 };
 
-const articlePages = readdirSync(
-  new URL("./src/content/posts", import.meta.url),
-)
-  .filter((fileName) => fileName.endsWith(".mdx"))
-  .map((fileName) => ({ path: `/posts/${fileName.slice(0, -4)}` }));
-
 export default defineConfig({
   server: { port: 3101 },
   resolve: { alias: { "@": new URL("./src", import.meta.url).pathname } },
@@ -48,7 +42,7 @@ export default defineConfig({
         autoStaticPathsDiscovery: false,
         autoSubfolderIndex: false,
       },
-      pages: [{ path: "/" }, ...articlePages],
+      pages,
     }),
     react({ include: /\.(mdx|[jt]sx?)$/ }),
   ],

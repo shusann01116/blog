@@ -20,7 +20,7 @@ function TagPage() {
   const { posts, tag } = Route.useLoaderData();
 
   return (
-    <main>
+    <main data-pagefind-ignore="all">
       <h1>Posts Tagged with “{tag}”</h1>
       {posts.map((post) => (
         <PostCard key={post.slug} post={post} />

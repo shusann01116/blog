@@ -10,7 +10,7 @@ export const Route = createFileRoute("/")({
 
 function HomePage() {
   return (
-    <main>
+    <main data-pagefind-ignore="all">
       <Home components={startMdxComponents} />
     </main>
   );

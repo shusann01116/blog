@@ -132,6 +132,10 @@ a {
   display: none;
 }
 
+.site-search-slot .dialog-trigger {
+  border-radius: 999px;
+}
+
 .site-content {
   width: min(100% - 2rem, 48rem);
   margin-inline: auto;
@@ -393,6 +397,52 @@ article > header > div {
   margin: 0 0 1rem;
   color: var(--text);
   font-size: 1.25rem;
+}
+
+.search-dialog__header {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 1rem;
+}
+
+.search-dialog__header .dialog-title {
+  margin-block: 0.45rem 1rem;
+}
+
+.search-dialog__status {
+  color: var(--text-muted);
+}
+
+.search-dialog__error {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+}
+
+.search-results {
+  display: grid;
+  margin: 0;
+  padding: 0;
+  gap: 0.75rem;
+  list-style: none;
+}
+
+.search-results li {
+  border-top: 1px solid var(--border);
+  padding-top: 0.75rem;
+}
+
+.search-results a {
+  color: var(--text);
+  font-weight: 700;
+}
+
+.search-results p {
+  margin-block: 0.25rem 0;
+  color: var(--text-muted);
+  font-size: 0.9rem;
 }
 
 .site-footer {

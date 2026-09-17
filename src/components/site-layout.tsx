@@ -8,6 +8,7 @@ import {
 import { Link } from "@tanstack/react-router";
 import type { ReactNode } from "react";
 
+import { SearchDialog } from "@/components/search-dialog";
 import { ThemeSwitch } from "@/components/theme-switch";
 
 const activePageProps = { "aria-current": "page" } as const;
@@ -43,7 +44,7 @@ const socialLinks = [
 export function SiteLayout({ children }: { children: ReactNode }) {
   return (
     <div className="site-shell">
-      <header className="site-header">
+      <header className="site-header" data-pagefind-ignore="all">
         <div className="site-header__inner">
           <Link className="site-brand" to="/">
             shusann01116
@@ -57,11 +58,9 @@ export function SiteLayout({ children }: { children: ReactNode }) {
             </Link>
           </nav>
           <div className="site-actions">
-            <div
-              aria-label="検索"
-              className="site-search-slot"
-              data-search-slot
-            />
+            <div className="site-search-slot" data-search-slot>
+              <SearchDialog />
+            </div>
             <ThemeSwitch />
           </div>
         </div>
@@ -69,7 +68,7 @@ export function SiteLayout({ children }: { children: ReactNode }) {
 
       <div className="site-content">{children}</div>
 
-      <footer className="site-footer">
+      <footer className="site-footer" data-pagefind-ignore="all">
         <div className="site-footer__inner">
           <nav aria-label="ソーシャルリンク" className="social-links">
             {socialLinks.map(({ href, icon, label }) => (

@@ -5,7 +5,7 @@
   "private": true,
   "scripts": {
     "build": "pnpm content:build && next build",
-    "build:start": "pnpm build:start:app",
+    "build:start": "pnpm content:build && vite build && tsx scripts/build/search.ts && pnpm typecheck:start",
     "build:start:app": "pnpm content:build && vite build",
     "content:build": "tsx scripts/content/build.ts",
     "dev": "pnpm content:build && next",

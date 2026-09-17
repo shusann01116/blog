@@ -41,5 +41,9 @@ export function PostBody({ slug }: { slug: string }) {
   if (!Body) return null;
   const content = createElement(Body, { components: startMdxComponents });
 
-  return <Suspense fallback={articleFallback}>{content}</Suspense>;
+  return (
+    <div data-pagefind-body>
+      <Suspense fallback={articleFallback}>{content}</Suspense>
+    </div>
+  );
 }
