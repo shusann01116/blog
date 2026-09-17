@@ -17,7 +17,7 @@ function PostsPage() {
   return (
     <main data-pagefind-ignore="all">
       <h1>Posts</h1>
-      <nav aria-label="Tags">
+      <nav aria-label="Tags" className="flex flex-wrap gap-2">
         {Object.entries(tags).map(([tag, count]) => (
           <TagLink key={tag} tag={tag}>
             {tag} ({count})

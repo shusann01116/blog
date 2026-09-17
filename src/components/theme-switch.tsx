@@ -5,15 +5,15 @@ export function ThemeSwitch() {
   return (
     <Button
       aria-label="テーマを切り替え"
-      className="theme-switch"
+      className="relative overflow-hidden rounded-full text-[1.15rem] leading-none"
       onClick={toggleTheme}
       title="テーマを切り替え"
       type="button"
     >
-      <span aria-hidden="true" className="theme-switch__light">
+      <span aria-hidden="true" className="dark:hidden">
         ☀
       </span>
-      <span aria-hidden="true" className="theme-switch__dark">
+      <span aria-hidden="true" className="hidden dark:inline">
         ◐
       </span>
     </Button>

@@ -20,17 +20,21 @@ export function CodeBlock({
   }, []);
 
   return (
-    <div className="code-block">
+    <div className="code-block relative my-6">
       <Button
         aria-label="コードをコピー"
-        className="code-block__copy"
+        className="absolute top-[0.6rem] right-[0.6rem] z-1 min-h-8! min-w-0! border-code-action-border! bg-code-action! px-[0.55rem] py-[0.2rem] text-xs text-code-action-text! hover:bg-code-action-hover!"
         onClick={copyCode}
         type="button"
       >
         Copy
       </Button>
-      <pre {...props} className={className} ref={preRef} />
-      <span aria-live="polite" className="visually-hidden" role="status">
+      <pre
+        {...props}
+        className={`m-0 max-w-full overflow-x-auto rounded-[0.8rem] border border-border bg-code-bg p-[1.2rem] text-[0.85rem] leading-[1.65] text-code-text ${className}`}
+        ref={preRef}
+      />
+      <span aria-live="polite" className="sr-only" role="status">
         {status}
       </span>
     </div>

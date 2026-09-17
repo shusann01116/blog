@@ -28,13 +28,13 @@ function PostPage() {
   return (
     <main>
       <article>
-        <header>
+        <header className="mb-12 border-border border-b pb-6">
           <h1>{post.title}</h1>
           <p>
             {post.author},{" "}
             <time dateTime={`${post.date}T00:00:00.000Z`}>{post.date}</time>
           </p>
-          <div>
+          <div className="flex flex-wrap gap-2">
             {post.tags.map((tag) => (
               <TagLink key={tag} tag={tag}>
                 {tag}

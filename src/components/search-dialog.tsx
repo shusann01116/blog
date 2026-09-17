@@ -81,12 +81,12 @@ export function SearchDialog() {
 
   return (
     <Dialog.Root onOpenChange={handleOpenChange} open={open}>
-      <Dialog.Trigger>検索</Dialog.Trigger>
+      <Dialog.Trigger className="rounded-full">検索</Dialog.Trigger>
       <Dialog.Portal>
         <Dialog.Backdrop />
-        <Dialog.Popup className="search-dialog">
-          <div className="search-dialog__header">
-            <Dialog.Title>記事を検索</Dialog.Title>
+        <Dialog.Popup>
+          <div className="flex items-start justify-between gap-4">
+            <Dialog.Title className="mt-[0.45rem]!">記事を検索</Dialog.Title>
             <Dialog.Close aria-label="検索を閉じる">閉じる</Dialog.Close>
           </div>
           <Input
@@ -97,11 +97,11 @@ export function SearchDialog() {
             type="search"
             value={query}
           />
-          <div aria-live="polite" className="search-dialog__status">
+          <div aria-live="polite" className="text-text-muted">
             {state.status === "empty" && <p>検索語を入力してください</p>}
             {state.status === "loading" && <p>検索中…</p>}
             {state.status === "error" && (
-              <div className="search-dialog__error">
+              <div className="flex items-center justify-between gap-4">
                 <p>検索を読み込めませんでした</p>
                 <Button onClick={handleRetry}>再試行</Button>
               </div>
@@ -111,11 +111,17 @@ export function SearchDialog() {
             )}
           </div>
           {state.status === "ready" && state.results.length > 0 && (
-            <ul className="search-results">
+            <ul className="m-0 grid list-none gap-3 p-0">
               {state.results.map((result) => (
-                <li key={result.url}>
-                  <a href={result.url}>{result.title}</a>
-                  {result.excerpt.length > 0 && <p>{result.excerpt}</p>}
+                <li className="border-border border-t pt-3" key={result.url}>
+                  <a className="font-bold text-text" href={result.url}>
+                    {result.title}
+                  </a>
+                  {result.excerpt.length > 0 && (
+                    <p className="mt-1 mb-0 text-[0.9rem] text-text-muted">
+                      {result.excerpt}
+                    </p>
+                  )}
                 </li>
               ))}
             </ul>

@@ -12,7 +12,18 @@ export function PostLink({
   return <Link to="/posts/$slug" params={params} {...props} />;
 }
 
-export function TagLink({ tag, ...props }: AnchorProps & { tag: string }) {
+export function TagLink({
+  className,
+  tag,
+  ...props
+}: AnchorProps & { tag: string }) {
   const params = useMemo(() => ({ tag }), [tag]);
-  return <Link to="/tags/$tag" params={params} {...props} />;
+  return (
+    <Link
+      to="/tags/$tag"
+      params={params}
+      {...props}
+      className={`rounded-full bg-surface-muted px-[0.65rem] py-[0.2rem] text-[0.8rem] no-underline ${className ?? ""}`}
+    />
+  );
 }

@@ -8,6 +8,8 @@ import {
 } from "@tanstack/react-router";
 
 import styleUrl from "@/styles/start.css?url";
+import notoSansJp400Url from "@fontsource/noto-sans-jp/400.css?url";
+import notoSansJp700Url from "@fontsource/noto-sans-jp/700.css?url";
 
 import { Analytics } from "@/components/analytics";
 import { ErrorView, NotFoundView } from "@/components/error-view";
@@ -33,6 +35,8 @@ export const Route = createRootRoute({
       { title: site.title },
     ],
     links: [
+      { rel: "stylesheet", href: notoSansJp400Url },
+      { rel: "stylesheet", href: notoSansJp700Url },
       { rel: "stylesheet", href: styleUrl },
       { rel: "icon", href: "/favicon.ico" },
     ],

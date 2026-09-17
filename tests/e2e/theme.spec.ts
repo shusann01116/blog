@@ -1,5 +1,68 @@
 import { expect, test } from "@playwright/test";
 
+const readSemanticColors = (page: import("@playwright/test").Page) =>
+  page.locator("html").evaluate((root) => {
+    const styles = getComputedStyle(root);
+    return {
+      page: styles.getPropertyValue("--page").trim(),
+      surface: styles.getPropertyValue("--surface").trim(),
+      text: styles.getPropertyValue("--text").trim(),
+      accent: styles.getPropertyValue("--accent").trim(),
+    };
+  });
+
+const readContrastRatio = (locator: import("@playwright/test").Locator) =>
+  locator.evaluate((element) => {
+    const styles = getComputedStyle(element);
+    const [foreground, background] = [styles.color, styles.backgroundColor].map(
+      (color) => {
+        const [red, green, blue] = (
+          color
+            .match(/[\d.]+/g)
+            ?.slice(0, 3)
+            .map(Number) ?? []
+        ).map((channel) => {
+          const normalized = channel / 255;
+          return normalized <= 0.04045
+            ? normalized / 12.92
+            : ((normalized + 0.055) / 1.055) ** 2.4;
+        });
+
+        return 0.2126 * red + 0.7152 * green + 0.0722 * blue;
+      },
+    );
+
+    return (
+      (Math.max(foreground, background) + 0.05) /
+      (Math.min(foreground, background) + 0.05)
+    );
+  });
+
+test("semantic color tokens follow the active theme", async ({ page }) => {
+  await page.emulateMedia({ colorScheme: "light" });
+  await page.goto("/");
+
+  await expect
+    .poll(() => readSemanticColors(page))
+    .toEqual({
+      page: "#f8fafc",
+      surface: "#fff",
+      text: "#253041",
+      accent: "#2563eb",
+    });
+
+  await page.getByRole("button", { name: "テーマを切り替え" }).click();
+
+  await expect
+    .poll(() => readSemanticColors(page))
+    .toEqual({
+      page: "#111827",
+      surface: "#182233",
+      text: "#e6edf5",
+      accent: "#8ab4ff",
+    });
+});
+
 test("テーマを再読み込み後も維持する", async ({ page }) => {
   await page.emulateMedia({ colorScheme: "light" });
   await page.goto("/");
@@ -65,6 +128,26 @@ test("コードの Shiki 配色と文字装飾をライト・ダークテーマ�
   await expect(propertyToken).toHaveCSS("color", "rgb(121, 184, 255)");
   await expect(commentToken).toHaveCSS("color", "rgb(253, 174, 183)");
   await expect(commentToken).toHaveCSS("font-style", "italic");
+});
+
+test("コードのコピーボタンは hover 時も両テーマで読める", async ({ page }) => {
+  await page.emulateMedia({ colorScheme: "light" });
+  await page.goto("/posts/2024-09-25-another-post");
+
+  const copyButton = page
+    .getByRole("button", { name: "コードをコピー" })
+    .first();
+
+  await copyButton.hover();
+  await expect
+    .poll(() => readContrastRatio(copyButton))
+    .toBeGreaterThanOrEqual(4.5);
+
+  await page.getByRole("button", { name: "テーマを切り替え" }).click();
+  await copyButton.hover();
+  await expect
+    .poll(() => readContrastRatio(copyButton))
+    .toBeGreaterThanOrEqual(4.5);
 });
 
 for (const viewport of [
