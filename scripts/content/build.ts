@@ -30,6 +30,15 @@ function sortPosts(posts: readonly PostMeta[]): PostMeta[] {
   );
 }
 
+function parseSource(source: string, sourcePath: string) {
+  try {
+    return matter(source);
+  } catch (error) {
+    const message = error instanceof Error ? error.message : String(error);
+    throw new Error(`${sourcePath}: ${message}`, { cause: error });
+  }
+}
+
 export async function buildContent({
   contentRoot = path.resolve("src/content"),
   generatedRoot = path.resolve("src/generated"),
@@ -47,7 +56,7 @@ export async function buildContent({
         seen.add(slug);
 
         const source = await readFile(sourcePath, "utf8");
-        const parsed = matter(source);
+        const parsed = parseSource(source, sourcePath);
         const metadata = parseFrontmatter(parsed.data, sourcePath);
         const minutes = Math.max(
           1,

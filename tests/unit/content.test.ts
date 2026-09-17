@@ -6,6 +6,7 @@ import matter from "gray-matter";
 import { afterEach, expect, test } from "vitest";
 
 import { buildContent } from "../../scripts/content/build";
+import { watchContent } from "../../scripts/content/vite-plugin";
 import { convertContent } from "../../scripts/migration/convert-content";
 
 const roots: string[] = [];
@@ -158,4 +159,72 @@ test("重複 slug を拒否し、生成済みファイルを更新しない", as
   expect(await readFile(path.join(generatedRoot, "posts.ts"), "utf8")).toBe(
     before,
   );
+});
+
+test("壊れた YAML のエラーに元ファイルを含める", async () => {
+  const root = await temporaryRoot();
+  const contentRoot = path.join(root, "content");
+  const generatedRoot = path.join(root, "generated");
+  const { mkdir } = await import("node:fs/promises");
+  await mkdir(path.join(contentRoot, "posts"), { recursive: true });
+  const postPath = path.join(contentRoot, "posts", "broken.mdx");
+  await writeFile(
+    postPath,
+    '---\ntitle: Broken\ndate: "2024-01-01"\ndescription: desc\ntags: [blog\nauthor: author\n---\n',
+  );
+
+  await expect(buildContent({ contentRoot, generatedRoot })).rejects.toThrow(
+    postPath,
+  );
+});
+
+test("監視中の生成失敗を通知し、次の変更で回復する", async () => {
+  const root = await temporaryRoot();
+  const contentRoot = path.join(root, "content");
+  const generatedRoot = path.join(root, "generated");
+  const { mkdir } = await import("node:fs/promises");
+  await mkdir(path.join(contentRoot, "posts"), { recursive: true });
+  const postPath = path.join(contentRoot, "posts", "recover.mdx");
+  await writeFile(postPath, "---\ntags: [broken\n---\n");
+
+  type Message =
+    { type: "full-reload" } | { type: "error"; err: { message: string } };
+  let listener: ((event: string, changedPath: string) => void) | undefined;
+  let resolveMessage: ((message: Message) => void) | undefined;
+  const nextMessage = () =>
+    new Promise<Message>((resolve) => {
+      resolveMessage = resolve;
+    });
+
+  watchContent({
+    contentRoot,
+    generatedRoot,
+    onAll: (registered) => {
+      listener = registered;
+    },
+    send: (message) => {
+      resolveMessage?.(message);
+      resolveMessage = undefined;
+    },
+  });
+  if (listener === undefined)
+    throw new Error("watch listener was not registered");
+
+  const errorMessage = nextMessage();
+  listener("change", postPath);
+  await expect(errorMessage).resolves.toMatchObject({
+    type: "error",
+    err: { message: expect.stringContaining(postPath) },
+  });
+
+  await writeFile(
+    postPath,
+    '---\ntitle: Recovered\ndate: "2024-01-01"\ndescription: desc\ntags: [blog]\nauthor: author\n---\n\n本文',
+  );
+  const reloadMessage = nextMessage();
+  listener("change", postPath);
+  await expect(reloadMessage).resolves.toEqual({ type: "full-reload" });
+  expect(
+    await readFile(path.join(generatedRoot, "posts.ts"), "utf8"),
+  ).toContain('"slug": "recover"');
 });
