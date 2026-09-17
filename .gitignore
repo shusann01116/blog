@@ -147,3 +147,5 @@ _pagefind/
 .worktrees/
 playwright-report/
 test-results/
+.wrangler/
+src/routeTree.gen.ts

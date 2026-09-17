@@ -5,8 +5,13 @@
   "private": true,
   "scripts": {
     "build": "next build",
+    "build:start": "pnpm build:start:app",
+    "build:start:app": "vite build",
     "dev": "next",
+    "dev:start": "vite --port 3101",
+    "preview:start": "vite preview --port 3101",
     "start": "next start",
+    "typecheck:start": "tsc -p tsconfig.start.json --noEmit",
     "lint": "oxlint",
     "lint:fix": "oxlint --fix",
     "format": "prettier -w .",
@@ -16,6 +21,8 @@
   "dependencies": {
     "@icons-pack/react-simple-icons": "13.15.1",
     "@next/third-parties": "16.3.4",
+    "@tanstack/react-router": "1.170.34",
+    "@tanstack/react-start": "1.168.51",
     "next": "16.3.4",
     "nextra": "4.6.1",
     "nextra-theme-blog": "4.6.1",
@@ -24,10 +31,13 @@
     "sharp": "0.35.4"
   },
   "devDependencies": {
+    "@cloudflare/vite-plugin": "1.54.6",
     "@playwright/test": "1.63.0",
     "@tailwindcss/postcss": "4.3.3",
     "@types/node": "26.4.1",
     "@types/react": "19.2.18",
+    "@types/react-dom": "19.2.3",
+    "@vitejs/plugin-react": "6.1.1",
     "autoprefixer": "10.5.5",
     "cheerio": "1.2.0",
     "lefthook": "2.1.12",
@@ -38,7 +48,9 @@
     "prettier": "3.9.6",
     "tailwindcss": "4.3.3",
     "tsx": "4.23.13",
-    "typescript": "6.0.3"
+    "typescript": "6.0.3",
+    "vite": "8.3.0",
+    "wrangler": "4.130.0"
   },
   "packageManager": "pnpm@11.26.0"
 }

@@ -1,0 +1,13 @@
+:root {
+  font-family: system-ui, sans-serif;
+  color: #171717;
+  background: #ffffff;
+}
+
+body {
+  margin: 0;
+}
+
+h1 {
+  margin: 2rem;
+}

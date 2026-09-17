@@ -1,0 +1,20 @@
+{
+  "extends": "./tsconfig.json",
+  "include": [
+    "next-env.d.ts",
+    "src/app/**/*.ts",
+    "src/app/**/*.tsx",
+    "src/app/**/*.mdx",
+    "src/utils/**/*.ts",
+    "src/utils/**/*.tsx",
+    "src/mdx-components.mjs",
+    ".next/types/**/*.ts",
+    ".next/dev/types/**/*.ts"
+  ],
+  "exclude": [
+    "node_modules",
+    "src/routes",
+    "src/router.tsx",
+    "src/routeTree.gen.ts"
+  ]
+}

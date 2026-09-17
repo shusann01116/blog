@@ -1,0 +1,15 @@
+{
+  "extends": "./tsconfig.json",
+  "compilerOptions": {
+    "plugins": [],
+    "target": "ES2022",
+    "types": ["vite/client"]
+  },
+  "include": [
+    "src/start-env.d.ts",
+    "src/router.tsx",
+    "src/routeTree.gen.ts",
+    "src/routes/**/*.tsx"
+  ],
+  "exclude": ["node_modules", "src/app"]
+}

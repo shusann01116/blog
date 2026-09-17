@@ -8,6 +8,9 @@ const withNextra = nextra({
 export default withNextra({
   cleanDistDir: true,
   reactStrictMode: true,
+  typescript: {
+    tsconfigPath: "tsconfig.next.json",
+  },
   turbopack: {
     resolveAlias: {
       "next-mdx-import-source-file": "./src/mdx-components.mjs",
