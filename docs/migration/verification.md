@@ -26,6 +26,9 @@ pnpm exec prettier --check \
   docs/migration/verification.md \
   docs/migration/cutover.md \
   docs/superpowers/plans/2026-09-16-tanstack-start-migration.md
+# 別ターミナルで起動し、この後の Playwright が終わるまで維持する
+pnpm preview:start
+# 元のターミナルで実行する
 TEST_ORIGIN=http://localhost:3101 pnpm exec playwright test --reporter=line
 pnpm exec wrangler deploy --dry-run --config dist/server/wrangler.json
 git diff --check
@@ -37,7 +40,7 @@ git diff --check
 - Next.js の独立ビルドは 13 ルートを生成し、Next.js 用 Pagefind は 10 ページを索引した。Nextra が Git worktree 内の最終更新時刻を取得できない警告は、移行前から記録している worktree 固有の制限である。
 - Start ビルドはトップ、記事一覧、6 記事、2 タグの合計 10 ページを事前生成した。Pagefind は旧 `public/_pagefind` を消費せず、同じ `dist/client` にある 6 記事の本文 1,490 語を索引した。
 - 最終成果物には `.html` が 10 個あり、一時検証用の文字列が残っていない。
-- ローカル preview に対するデフォルト Playwright は 78 テストが成功し、1 テストをスキップした。スキップ対象はタスク 7 で実行済みの計測有効化テストであり、デフォルト成果物から実際の GA へデータを送ることを避けている。
+- ローカル preview に対するデフォルト Playwright は 78 テストが成功し、1 テストをスキップした。スキップ対象は明示的に計測を有効にした専用ビルドを必要とするため、デフォルト成果物では実行しないタスク 7 の analytics テストである。タスク 7 ではこの専用テスト 1 件が成功済みで、GTM をローカルで応答し `gtag` を stub 化したため、実際の GA collection endpoint へは送信していない。
 - Playwright は初期 HTML、head、全記事の日付とメタデータ、RSS の MIME と内容、タグ件数、日本語アンカー、404、308 リダイレクトを旧基準と比較した。画像、ビルド時に決まる CSS とフォント、Pagefind のローダーと分割索引と記事フラグメントも HTTP 200 で取得した。
 - Wrangler の dry-run は生成設定から Worker モジュールと `dist/client` の 552 アセットを読み、アップロードせずに正常終了した。
 
