@@ -12,13 +12,13 @@ export function sortPosts(postsToSort: readonly PostMeta[]): PostMeta[] {
 export function countTags(
   postsToCount: readonly PostMeta[],
 ): Record<string, number> {
-  const counts: Record<string, number> = {};
+  const counts = new Map<string, number>();
   for (const post of postsToCount) {
     for (const tag of post.tags) {
-      counts[tag] = (counts[tag] ?? 0) + 1;
+      counts.set(tag, (counts.get(tag) ?? 0) + 1);
     }
   }
-  return counts;
+  return Object.fromEntries(counts);
 }
 
 export function getPosts(): PostMeta[] {

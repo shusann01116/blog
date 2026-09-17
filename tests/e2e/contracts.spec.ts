@@ -146,3 +146,68 @@ test("不明タグは空一覧", async ({ page }) => {
     "not-a-tag",
   );
 });
+
+test("画像、フォント、Pagefind の公開アセットを取得できる", async ({
+  request,
+}) => {
+  const image = await request.get("/imgs/lgtmoon-rs.png");
+  expect(image.status()).toBe(200);
+  expect(mimeEssence(image.headers()["content-type"])).toBe("image/png");
+
+  const home = await request.get("/");
+  const $ = load(await home.text());
+  const stylesheetPath = $('link[rel="stylesheet"]').attr("href");
+  expect(stylesheetPath).toMatch(/^\/assets\/[^/]+\.css$/);
+
+  const stylesheet = await request.get(stylesheetPath!);
+  expect(stylesheet.status()).toBe(200);
+  expect(mimeEssence(stylesheet.headers()["content-type"])).toBe("text/css");
+  const fontPath = (await stylesheet.text()).match(
+    /url\((\/assets\/noto-sans-jp-[^)]+\.woff2)\)/,
+  )?.[1];
+  expect(fontPath).toBeDefined();
+
+  const font = await request.get(fontPath!);
+  expect(font.status()).toBe(200);
+  expect(mimeEssence(font.headers()["content-type"])).toBe("font/woff2");
+
+  const pagefindResponses = await Promise.all(
+    ["/_pagefind/pagefind.js", "/_pagefind/pagefind-entry.json"].map((path) =>
+      request.get(path),
+    ),
+  );
+  expect(pagefindResponses.every((response) => response.status() === 200)).toBe(
+    true,
+  );
+});
+
+test("Pagefind の分割索引と記事フラグメントを取得できる", async ({ page }) => {
+  const shardResponses: { path: string; status: number }[] = [];
+  page.on("response", (response) => {
+    const path = new URL(response.url()).pathname;
+    if (
+      /\/_pagefind\/(?:index|fragment)\/[^/]+\.pf_(?:index|fragment)$/.test(
+        path,
+      )
+    ) {
+      shardResponses.push({ path, status: response.status() });
+    }
+  });
+
+  await page.goto("/");
+  await page.getByRole("button", { name: "検索", exact: true }).click();
+  await page
+    .getByRole("searchbox", { name: "記事を検索" })
+    .fill("ヒューリスティック");
+  await expect(
+    page.getByRole("link", { name: "ヒューリスティックをコントロールしたい" }),
+  ).toBeVisible();
+
+  expect(shardResponses.some(({ path }) => path.includes("/index/"))).toBe(
+    true,
+  );
+  expect(shardResponses.some(({ path }) => path.includes("/fragment/"))).toBe(
+    true,
+  );
+  expect(shardResponses.every(({ status }) => status === 200)).toBe(true);
+});

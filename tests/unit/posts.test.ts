@@ -88,6 +88,18 @@ test("タグごとの記事数を数える", () => {
   expect(countTags(posts)).toEqual({ blog: 5, book: 1 });
 });
 
+test("オブジェクトの組み込み名もタグとして数える", () => {
+  const post = makePost("reserved-tags", "2024-01-01");
+  post.tags = ["constructor", "__proto__", "constructor"];
+
+  const counts = countTags([post]);
+
+  expect(Object.hasOwn(counts, "constructor")).toBe(true);
+  expect(counts["constructor"]).toBe(2);
+  expect(Object.hasOwn(counts, "__proto__")).toBe(true);
+  expect(counts["__proto__"]).toBe(1);
+});
+
 test("移植した全記事のタグ件数と読了時間を公開する", () => {
   const posts = getPosts();
 

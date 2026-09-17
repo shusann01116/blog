@@ -1,9 +1,12 @@
 import { useCallback, useRef, useState } from "react";
-import type { ComponentProps } from "react";
+import type { ComponentPropsWithoutRef } from "react";
 
 import { Button } from "@/shared/components/button";
 
-export function CodeBlock({ className = "", ...props }: ComponentProps<"pre">) {
+export function CodeBlock({
+  className = "",
+  ...props
+}: ComponentPropsWithoutRef<"pre">) {
   const preRef = useRef<HTMLPreElement>(null);
   const [status, setStatus] = useState("");
 

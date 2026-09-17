@@ -10,6 +10,24 @@
 
 **Spec:** [承認済み設計書](../specs/2026-09-16-tanstack-start-migration-design.md)
 
+## 実装状態（2026-09-17）
+
+- [x] タスク 1：現行ブログの比較基準を保存した。
+- [x] タスク 2：Next.js と並行で起動する Start / Workers 基盤を作った。
+- [x] タスク 3：MDX コンテンツと記事データを移行した。
+- [x] タスク 4：ルート、RSS、メタデータ、日本語アンカーを移行した。
+- [x] タスク 5：Base UI を使う画面とテーマ、自己配信フォントを作った。
+- [x] タスク 6：10 ページの事前生成と 6 記事本文の Pagefind 索引を作った。
+- [x] タスク 7：計測ゲートとエラー表示を実装した。
+- [x] タスク 8（ローカル）：並行 Next.js ビルド、Start 成果物、同版の記事と検索索引、Wrangler dry-run を検証した。
+- [ ] タスク 8（外部）：Cloudflare プレビューの公開、URL / deployment ID の記録、実 URL でのテスト。
+- [ ] 本番切替前ゲート：GA プロパティ側の履歴変更による自動 pageview 無効化の確認。
+- [ ] タスク 9：本番切替と検証後の Next.js 除去。
+
+実装時の判断として、Workers の `compatibility_date` は固定依存でビルド、ローカル preview、dry-run が成功した `2026-09-15` を維持する。
+ローカル preview は Cloudflare 上の preview と同一視しない。
+Wrangler が未認証であり Cloudflare アカウント用の connector もないため、公開とドメイン操作は未実施のままとする。
+
 ## Global Constraints
 
 - Node.js 24.21.0、pnpm 11.26.0。
@@ -23,7 +41,7 @@
 - プレビュー環境では本番への計測送信を無効にする。
 - 既存記事の本文、slug、日付以外の frontmatter、画像 URL、日本語アンカーを維持する。
 - 不明記事は HTTP 404、不明タグは空一覧の HTTP 200 とする。
-- 現在は計画作成のみ。以下のコマンド、コード、テストは実装時に実行する。
+- 実行済みの範囲と外部環境に残るゲートは「実装状態」で管理する。
 
 ## 実行順序と確認地点
 
@@ -577,14 +595,14 @@ gtag("event", "page_view", { page_location: url, page_title: title });
 
 **Interfaces:** 同じ `TEST_ORIGIN` でローカル preview と Cloudflare のプレビュー URL を検証する。プレビュー用 Worker は本番ドメインに紐付けない。
 
-- [ ] `pnpm content:build`、`pnpm exec vitest run`、`pnpm build:start`、`pnpm lint`、`pnpm exec prettier --check` を変更対象へ実行する。生成物を lint 対象から除外し、新規コードの問題と既存の問題を区別して記録する。
-- [ ] 最新のローカル成果物に対する全 Playwright テストを実行する。初期 HTML、head、各記事の日付、RSS、タグ件数、既存の日本語アンカーを baseline と比較する。見た目の差は許容するが、内容の差は説明できるものだけにする。
+- [x] `pnpm content:build`、`pnpm exec vitest run`、`pnpm build:start`、`pnpm lint`、`pnpm exec prettier --check` を変更対象へ実行する。生成物を lint 対象から除外し、新規コードの問題と既存の問題を区別して記録する。
+- [x] 最新のローカル成果物に対する全 Playwright テストを実行する。初期 HTML、head、各記事の日付、RSS、タグ件数、既存の日本語アンカーを baseline と比較する。見た目の差は許容するが、内容の差は説明できるものだけにする。
 - [ ] Wrangler の生成設定がプレビュー Worker を指していることを確認し、完成した成果物を `pnpm exec wrangler deploy` でプレビューへ公開する。公開 URL と deployment ID を記録する。
 - [ ] `TEST_ORIGIN` に実際のプレビュー URL を設定し、`pnpm exec playwright test` を実行する。`/_pagefind/pagefind.js` と分割索引、画像、フォントの取得、RSS の MIME、未知 URL の status を検証する。
-- [ ] アセットの優先順位と末尾スラッシュのリダイレクトを確認する。`assets.not_found_handling` は `none` を維持し、既存の静的ファイルが見つからない場合に Worker のルーティングが動くことを確認する。既知 HTML の配信を意図せず Worker 必須にしない。
-- [ ] 記事を一時的に変更したプレビュービルドで、本文と検索結果が同じ版になることを確認し、その試験変更を元に戻してから最終成果物を作る。
-- [ ] verification.md に実行コマンド、対象コミット、結果、残っている差分を記録する。cutover.md に現在のサービス種別、旧 deployment ID、ドメイン設定、新 Worker 名、復旧操作を具体的に記録する。値を取得できない場合は本番切替を未完了として扱う。
-- [ ] 記録と設定だけをコミットする。コミット名: `docs: record Cloudflare migration verification`。
+- [x] ローカル preview でアセットの優先順位と末尾スラッシュのリダイレクトを確認する。`assets.not_found_handling` は `none` を維持し、既存の静的ファイルが見つからない場合に Worker のルーティングが動くことを確認する。既知 HTML の配信を意図せず Worker 必須にしない。Cloudflare 上の再確認は外部ゲートに残す。
+- [x] 記事を一時的に変更したプレビュービルドで、本文と検索結果が同じ版になることを確認し、その試験変更を元に戻してから最終成果物を作る。
+- [x] verification.md に実行コマンド、対象コミット、結果、残っている差分を記録する。cutover.md に現在のサービス種別、旧 deployment ID、ドメイン設定、新 Worker 名、復旧操作を具体的に記録する。値を取得できない場合は本番切替を未完了として扱う。
+- [x] 記録と設定をコミットする。コミット名: `docs: record Cloudflare migration verification`。
 
 ## Task 9: 本番を切り替えて Next.js を除去する
 
