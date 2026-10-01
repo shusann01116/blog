@@ -30,7 +30,7 @@
     "autoprefixer": "10.6.1",
     "lefthook": "2.1.14",
     "oxlint": "1.85.0",
-    "oxlint-tsgolint": "7.0.2002",
+    "oxlint-tsgolint": "7.0.2003",
     "pagefind": "1.5.2",
     "postcss": "8.5.28",
     "prettier": "3.9.8",
