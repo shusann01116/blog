@@ -84,5 +84,5 @@ down the hook dispatcher. Be especially careful with `aube lint:fix`, which can 
 - Deploy only `out/`; no Node.js server or `next start` is needed in production. Node.js and pnpm are still required at build time.
 - RSS and known tag routes are generated at build time. New content requires a rebuild.
 - Images are served as original static assets, without the runtime Next.js image optimizer.
-- Preserve extensionless URLs with the host's clean-URL support (`/posts` maps to `/posts.html`); unknown paths must serve `404.html` with status 404, not an SPA fallback. Vercel supports the Next.js export directly.
+- Preserve extensionless URLs with the host's clean-URL support (`/posts` maps to `/posts.html`); unknown paths must serve `404.html` with status 404, not an SPA fallback. Vercel is explicitly configured as a static host (`framework: null`, `outputDirectory: "out"`, `cleanUrls: true`).
 - See `DEPENDENCY_UPDATES.md` for the staged, protected Renovate automerge setup.
