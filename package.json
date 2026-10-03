@@ -7,11 +7,12 @@
     "build": "next build",
     "dev": "next",
     "start": "next start",
-    "lint": "oxlint",
-    "lint:fix": "oxlint --fix",
+    "lint": "next typegen && oxlint",
+    "lint:fix": "next typegen && oxlint --fix",
     "format": "prettier -w .",
     "prepare": "lefthook install",
-    "postbuild": "pagefind --site .next/server/app --output-path public/_pagefind"
+    "postbuild": "pagefind --site .next/server/app --output-path public/_pagefind",
+    "typecheck": "next typegen && tsc --noEmit"
   },
   "dependencies": {
     "@icons-pack/react-simple-icons": "13.15.1",
@@ -30,12 +31,12 @@
     "autoprefixer": "10.6.1",
     "lefthook": "2.1.14",
     "oxlint": "1.85.0",
-    "oxlint-tsgolint": "7.0.2002",
+    "oxlint-tsgolint": "7.0.2003",
     "pagefind": "1.5.2",
     "postcss": "8.5.28",
-    "prettier": "3.9.8",
+    "prettier": "3.9.9",
     "tailwindcss": "4.3.3",
     "typescript": "6.0.3"
   },
-  "packageManager": "pnpm@11.28.2"
+  "packageManager": "pnpm@12.6.0"
 }
