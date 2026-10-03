@@ -12,7 +12,8 @@
     "prepare": "lefthook install",
     "postbuild": "pagefind --site out --output-path out/_pagefind",
     "typecheck": "next typegen && tsc --noEmit",
-    "check:static": "node scripts/check-static-export.mjs"
+    "test:static": "node scripts/check-static-export.mjs",
+    "test:e2e": "node scripts/check-http-pages.mjs"
   },
   "dependencies": {
     "@icons-pack/react-simple-icons": "13.15.1",

@@ -1,6 +1,6 @@
 # Dependency updates
 
-## Proposed activation: protected major, minor and patch updates
+## Protected major, minor and patch updates
 
 This configuration enables Renovate squash-merging for major, minor and patch
 updates. Do not merge it until the protection checklist below is completed.
@@ -17,8 +17,8 @@ Require both checks from their expected integrations:
 
 `Vercel Preview Comments` is not deployment success. Verify that missing, pending
 or failed checks block merging and that checks refer to the PR's current head.
-The HTTP 200 smoke check is a separate change in PR #118; merge and verify that
-change before activating this configuration.
+The HTTP 200 smoke check was merged separately in PR #118 as `pnpm test:e2e`.
+Static integrity validation runs as `pnpm test:static`.
 
 Keep `platformAutomerge: false`, `ignoreTests: false`, `automergeType: "pr"` and
 `automergeStrategy: "squash"`. Renovate performs the merge; GitHub's repository
@@ -28,8 +28,9 @@ option, enforces the CI and deployment gates.
 
 ## Scope and safeguards
 
-The existing CI validates frozen installation, lint, type checking, production
-static build and static-output integrity. Vercel separately validates deployment.
+The CI validates frozen installation, lint, type checking, production static
+build, `pnpm test:static` output integrity and `pnpm test:e2e` HTTP status.
+Vercel separately validates deployment.
 These checks are minimal and do not guarantee appearance or browser behavior.
 
 Major upgrades use the same gates. TypeScript 7 currently fails the
