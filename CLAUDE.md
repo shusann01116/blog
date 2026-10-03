@@ -19,7 +19,7 @@ Personal blog built with **Next.js 16** + **Nextra 4** (MDX blog theme). Content
 
 Package manager is **pnpm 12** (enforced via `packageManager` field). Do not use npm or yarn.
 
-`pnpm check:static` checks the built static export (pages, local assets, RSS, and search index). CI also runs lint, type checking, and the production build.
+`pnpm test:static` checks the built static export (pages, local assets, RSS, and search index). `pnpm test:e2e` serves the export locally and requires HTTP 200 from every public HTML page. CI also runs lint, type checking, and the production build.
 
 ## Architecture
 
