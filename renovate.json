@@ -2,11 +2,29 @@
   "$schema": "https://docs.renovatebot.com/renovate-schema.json",
   "extends": ["config:recommended"],
   "minimumReleaseAge": "7 days",
+  "automerge": false,
+  "automergeType": "pr",
+  "automergeStrategy": "squash",
+  "platformAutomerge": false,
+  "ignoreTests": false,
   "packageRules": [
     {
+      "description": "Activate only after CI and Vercel checks are required",
       "matchUpdateTypes": ["minor", "patch"],
-      "automerge": true,
-      "platformAutomerge": true
+      "automerge": false
+    },
+    {
+      "description": "Keep majors manual, including TypeScript 7 until Nextra/Twoslash supports it",
+      "matchUpdateTypes": ["major"],
+      "automerge": false
     }
-  ]
+  ],
+  "minimumReleaseAgeBehaviour": "timestamp-required",
+  "internalChecksFilter": "strict",
+  "vulnerabilityAlerts": {
+    "automerge": false
+  },
+  "internalChecksAsSuccess": false,
+  "rebaseWhen": "behind-base-branch",
+  "separateMajorMinor": true
 }

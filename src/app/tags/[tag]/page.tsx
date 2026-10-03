@@ -1,6 +1,8 @@
 import { PostCard } from "nextra-theme-blog";
 import { getPosts, getTags } from "@/utils/get-posts";
 
+export const dynamicParams = false;
+
 export async function generateMetadata(props: PageProps<"/tags/[tag]">) {
   const params = await props.params;
   return {
