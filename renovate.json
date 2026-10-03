@@ -9,14 +9,9 @@
   "ignoreTests": false,
   "packageRules": [
     {
-      "description": "Activate only after CI and Vercel checks are required",
-      "matchUpdateTypes": ["minor", "patch"],
-      "automerge": false
-    },
-    {
-      "description": "Keep majors manual, including TypeScript 7 until Nextra/Twoslash supports it",
-      "matchUpdateTypes": ["major"],
-      "automerge": false
+      "description": "Automerge version updates only after required CI and Vercel checks pass",
+      "matchUpdateTypes": ["major", "minor", "patch"],
+      "automerge": true
     }
   ],
   "minimumReleaseAgeBehaviour": "timestamp-required",
