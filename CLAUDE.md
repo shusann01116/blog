@@ -19,7 +19,7 @@ Personal blog built with **Next.js 16** + **Nextra 4** (MDX blog theme). Content
 
 Package manager is **pnpm 12** (enforced via `packageManager` field). Do not use npm or yarn.
 
-`pnpm check:static` checks the built static export (pages, local assets, RSS, and search index). CI also runs lint, type checking, and the production build.
+`pnpm check:static` checks the built static export (pages, local assets, RSS, and search index). `pnpm check:http` serves the export locally and requires HTTP 200 from every public HTML page. CI also runs lint, type checking, and the production build.
 
 ## Architecture
 
@@ -85,4 +85,4 @@ down the hook dispatcher. Be especially careful with `aube lint:fix`, which can 
 - RSS and known tag routes are generated at build time. New content requires a rebuild.
 - Images are served as original static assets, without the runtime Next.js image optimizer.
 - Preserve extensionless URLs with the host's clean-URL support (`/posts` maps to `/posts.html`); unknown paths must serve `404.html` with status 404, not an SPA fallback. Vercel is explicitly configured as a static host (`framework: null`, `outputDirectory: "out"`, `cleanUrls: true`).
-- See `DEPENDENCY_UPDATES.md` for the staged, protected Renovate automerge setup.
+- See `DEPENDENCY_UPDATES.md` for the protected Renovate automerge setup.

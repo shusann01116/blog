@@ -1,60 +1,47 @@
 # Dependency updates
 
-## Current stage: validation first
+Renovate automatically squash-merges major, minor, and patch updates after the
+checks below pass. New versions must have been published at least seven days ago;
+versions without a release timestamp remain pending. pnpm also keeps its existing
+seven-day minimum release-age policy for dependency installation.
 
-Renovate is deliberately paused for **automatic merging**, not update PR creation.
-The repository previously enabled minor/patch automerge without required checks.
-GitHub's repository-level `allow_auto_merge: false` is not a reliable kill switch:
-Renovate can fall back to merging the PR itself.
+## Required GitHub protection before enabling this configuration
 
-This change adds the always-run `Validate static export` GitHub Actions check:
+Protect `main` with both of these required checks, require branches to be up to
+date, and do not give Renovate a bypass:
 
-- frozen pnpm install, with the existing seven-day supply-chain policy
-- type-aware lint and TypeScript type checking
-- production static build and Pagefind indexing
-- integrity checks for every post, RSS entries, tag/navigation links, local assets,
-  search-index output, and absence of runtime image-optimizer URLs
+- `Validate static export` from GitHub Actions
+- `Vercel` from the Vercel integration
 
-`Vercel` is the deployment-success status. `Vercel Preview Comments` only reports
-comment creation and is **not** a substitute for a successful preview deployment.
+`Vercel Preview Comments` is not a deployment-success check. Renovate's
+`platformAutomerge: false` and `ignoreTests: false` keep Renovate in charge of
+checking and merging the PR, but GitHub protection is needed to require both
+checks even when one has not reported yet. Do not merge this configuration before
+the protection is applied and verified.
 
-## Activation checklist (requires owner approval)
+## Minimal checks
 
-Do not enable automerge until all steps below have been reviewed and completed:
+The existing CI job runs frozen installation, lint, type checking, a production
+static build, and static-output integrity checks. It additionally runs
+`pnpm check:http`: serve the built `out/` directory locally, request every public
+HTML page at its clean URL, and require HTTP 200. Generated internal/error pages
+are excluded. This adds no dependencies and requires no Vercel preview secrets.
 
-1. Run this PR's CI and Vercel preview successfully, then merge the validation work.
-2. Protect `main` using a GitHub ruleset or branch protection. Require both
-   `Validate static export` (GitHub Actions) and `Vercel` (Vercel App) before merging.
-   Bind checks to their expected integrations and require the branch to be up to
-   date. Keep Renovate subject to the requirements (no bypass). Do not require
-   `Vercel Preview Comments` or the Renovate-only age status on every PR.
-3. Verify with a Renovate PR that a missing, pending, or failed CI/Vercel check
-   prevents merging. Confirm the required checks refer to the PR's current head.
-4. In a separate reviewed change, change only the minor/patch rule to:
+This is intentionally a minimal smoke test for this personal project. It does not
+assert page content, appearance, browser JavaScript, or search interactions, and
+local serving does not validate Vercel routing. Vercel deployment success remains
+a separate required check.
 
-   ```json
-   {
-     "matchUpdateTypes": ["minor", "patch"],
-     "automerge": true
-   }
-   ```
+Major upgrades use the same checks as other version updates. For example,
+TypeScript 7 currently fails the Nextra/Twoslash build; that failure must block its
+merge rather than being bypassed. There is no special version exclusion.
 
-   Keep the top-level `automerge: false`, `platformAutomerge: false`,
-   `automergeType: "pr"`, `automergeStrategy: "squash"`, and `ignoreTests: false`.
-   Renovate will perform the merge only after checks pass; it does not need
-   GitHub's platform auto-merge setting enabled. Do not use the deprecated
-   `requiredStatusChecks` Renovate option as a substitute for GitHub protection.
+Pin/digest updates, lockfile-maintenance PRs and vulnerability-alert PRs remain
+manual. Renovate can create security-alert PRs before the normal age threshold,
+so those PRs explicitly have automatic merging disabled.
 
-The activation scope is patch/minor updates only. Majors, lockfile-maintenance,
-pin/digest updates, and vulnerability-alert PRs remain manual. Seven days of
-release age is required before ordinary updates are proposed; missing release
-timestamps remain pending. Vulnerability PRs may be created sooner by Renovate's
-security exception but cannot auto-merge.
-
-TypeScript 7 is not compatible with the current Nextra/Twoslash API; keep that
-major upgrade manual until verified. Any known dependency advisory still needs
-separate review: static serving reduces server exposure but does not remove
-build-time dependency risks (including the previously reported braces advisory).
+Static hosting does not eliminate build-time dependency risks; the previously
+reported braces advisory remains a separate dependency concern.
 
 ## References
 

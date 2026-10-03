@@ -31,3 +31,4 @@ jobs:
       - run: pnpm typecheck
       - run: pnpm build
       - run: pnpm check:static
+      - run: pnpm check:http
