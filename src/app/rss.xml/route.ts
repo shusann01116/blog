@@ -1,5 +1,7 @@
 import { getPosts } from "@/utils/get-posts";
 
+export const dynamic = "force-static";
+
 const CONFIG = {
   description: "Latest blog posts",
   lang: "en-us",

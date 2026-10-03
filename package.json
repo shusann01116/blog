@@ -6,13 +6,13 @@
   "scripts": {
     "build": "next build",
     "dev": "next",
-    "start": "next start",
     "lint": "next typegen && oxlint",
     "lint:fix": "next typegen && oxlint --fix",
     "format": "prettier -w .",
     "prepare": "lefthook install",
-    "postbuild": "pagefind --site .next/server/app --output-path public/_pagefind",
-    "typecheck": "next typegen && tsc --noEmit"
+    "postbuild": "pagefind --site out --output-path out/_pagefind",
+    "typecheck": "next typegen && tsc --noEmit",
+    "check:static": "node scripts/check-static-export.mjs"
   },
   "dependencies": {
     "@icons-pack/react-simple-icons": "13.15.1",

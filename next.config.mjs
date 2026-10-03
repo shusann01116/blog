@@ -6,6 +6,8 @@ const withNextra = nextra({
 });
 
 export default withNextra({
+  output: "export",
+  images: { unoptimized: true },
   cleanDistDir: true,
   reactStrictMode: true,
   turbopack: {

@@ -19,13 +19,13 @@ Personal blog built with **Next.js 16** + **Nextra 4** (MDX blog theme). Content
 
 Package manager is **pnpm 12** (enforced via `packageManager` field). Do not use npm or yarn.
 
-There are no tests configured in this project.
+`pnpm check:static` checks the built static export (pages, local assets, RSS, and search index). CI also runs lint, type checking, and the production build.
 
 ## Architecture
 
 - **Framework**: Next.js App Router with Nextra (`nextra-theme-blog`) for MDX content
 - **Styling**: Tailwind CSS v4 via PostCSS, plus Nextra theme styles
-- **Search**: Pagefind generates a static search index at build time from `.next/server/app` into `public/_pagefind`
+- **Search**: Pagefind generates a static search index at build time from `out` into `out/_pagefind`
 - **Analytics**: Google Analytics via `@next/third-parties`
 
 ### Key directories
@@ -77,3 +77,12 @@ function's synchronous prologue still runs inside React's render scope. Placed _
 `await`, it crashes the production prerender with
 `TypeError: Cannot read properties of null (reading 'useMemo')`, since React has already torn
 down the hook dispatcher. Be especially careful with `aube lint:fix`, which can reintroduce this.
+
+## Static hosting and dependency updates
+
+- `pnpm build` creates the deployable `out/` directory, including the Pagefind index.
+- Deploy only `out/`; no Node.js server or `next start` is needed in production. Node.js and pnpm are still required at build time.
+- RSS and known tag routes are generated at build time. New content requires a rebuild.
+- Images are served as original static assets, without the runtime Next.js image optimizer.
+- Preserve extensionless URLs with the host's clean-URL support (`/posts` maps to `/posts.html`); unknown paths must serve `404.html` with status 404, not an SPA fallback. Vercel supports the Next.js export directly.
+- See `DEPENDENCY_UPDATES.md` for the staged, protected Renovate automerge setup.
