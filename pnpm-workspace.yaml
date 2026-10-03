@@ -9,3 +9,7 @@ allowBuilds:
 # Only install package versions published at least 7 days ago (in minutes).
 # Keep in sync with minimumReleaseAge in renovate.json.
 minimumReleaseAge: 10080
+
+# Keep the compatibility override limited to the legacy MathJax speech engine.
+overrides:
+  "speech-rule-engine@4.1.4>@xmldom/xmldom": 0.9.12

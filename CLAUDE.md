@@ -8,15 +8,16 @@ Personal blog built with **Next.js 16** + **Nextra 4** (MDX blog theme). Content
 
 ## Commands
 
-| Command         | Description                                                                  |
-| --------------- | ---------------------------------------------------------------------------- |
-| `aube dev`      | Start dev server (Turbopack)                                                 |
-| `aube build`    | Production build (runs `next build`, then Pagefind indexing via `postbuild`) |
-| `aube lint`     | oxlint (config in `.oxlintrc.json`)                                          |
-| `aube lint:fix` | oxlint with autofix — see the Server Components caveat below                 |
-| `aube format`   | Prettier formatting                                                          |
+| Command          | Description                                                                  |
+| ---------------- | ---------------------------------------------------------------------------- |
+| `aube dev`       | Start dev server (Turbopack)                                                 |
+| `aube build`     | Production build (runs `next build`, then Pagefind indexing via `postbuild`) |
+| `aube lint`      | Generate Next.js types, then oxlint (config in `.oxlintrc.json`)             |
+| `aube lint:fix`  | Generate Next.js types, then oxlint with autofix — see the caveat below      |
+| `aube typecheck` | Generate Next.js types, then run TypeScript without emitting files           |
+| `aube format`    | Prettier formatting                                                          |
 
-Package manager is **pnpm 11** (enforced via `packageManager` field). Do not use npm or yarn.
+Package manager is **pnpm 12** (enforced via `packageManager` field). Do not use npm or yarn.
 
 There are no tests configured in this project.
 
