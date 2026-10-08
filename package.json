@@ -30,7 +30,7 @@
     "@types/node": "26.6.2",
     "@types/react": "19.3.0",
     "autoprefixer": "10.6.1",
-    "lefthook": "2.1.15",
+    "lefthook": "2.1.16",
     "oxlint": "1.85.0",
     "oxlint-tsgolint": "7.0.2003",
     "pagefind": "1.5.2",
