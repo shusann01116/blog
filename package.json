@@ -27,7 +27,7 @@
   },
   "devDependencies": {
     "@tailwindcss/postcss": "4.3.3",
-    "@types/node": "26.6.2",
+    "@types/node": "26.6.4",
     "@types/react": "19.3.0",
     "autoprefixer": "10.6.1",
     "lefthook": "2.1.16",
