@@ -20,6 +20,8 @@ export const metadata = {
 };
 
 const backgroundColor = { dark: "#0f172a", light: "#fefefa" };
+// Evaluated once at build time (static export).
+const currentYear = new Date().getFullYear();
 
 export default async function RootLayout({ children }: LayoutProps<"/">) {
   return (
@@ -68,7 +70,7 @@ export default async function RootLayout({ children }: LayoutProps<"/">) {
                 </a>
               </span>
               <section className="text-sm text-gray-500 dark:text-gray-400 leading-4 ml-auto">
-                {new Date().getFullYear()} © shusann01116.
+                {currentYear} © shusann01116.
               </section>
             </div>
           </Footer>

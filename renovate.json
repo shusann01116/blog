@@ -12,6 +12,11 @@
       "description": "Automerge version updates only after required CI and Vercel checks pass",
       "matchUpdateTypes": ["major", "minor", "patch"],
       "automerge": true
+    },
+    {
+      "description": "TypeScript 7 (native) has no JS API; Nextra's twoslash transformer crashes the build. Revisit once nextra/twoslash support it.",
+      "matchPackageNames": ["typescript"],
+      "allowedVersions": "<7"
     }
   ],
   "minimumReleaseAgeBehaviour": "timestamp-required",
